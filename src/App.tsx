@@ -8,8 +8,6 @@ import ServicesPage from "./pages/Services.tsx";
 import BlogPage from "./pages/Blog.tsx";
 import ContactUsPage from "./pages/Contact.tsx";
 
-import './App.css';
-
 const router = createBrowserRouter([
     {
         path: '/',

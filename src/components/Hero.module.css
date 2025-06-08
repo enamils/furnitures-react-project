@@ -1,0 +1,43 @@
+.hero {
+    background-color: var(--primary);
+
+    p {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    @media (min-width: 768px) {
+        padding: calc(4rem - 30px) 0 4rem 0;
+    }
+
+    @media (min-width: 992px) {
+        padding: calc(8rem - 30px) 0 8rem 0;
+    }
+
+    img {
+        position: relative;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        width: 100%;
+        max-width: 780px;
+        left: -20px;
+
+        @media (min-width: 768px) {
+            right: 0;
+            left: -100px;
+        }
+
+        @media (min-width: 992px) {
+            position: absolute;
+            left: 0;
+            top: -80px;
+            right: -50px;
+        }
+
+        @media (min-width: 1200px) {
+            left: 0;
+            top: -80px;
+            right: -100px;
+        }
+    }
+}
