@@ -1,4 +1,4 @@
-.menulinks {
-
-
+.menulinks li a {
+    color: var(--white);
+    opacity: .5;
 }

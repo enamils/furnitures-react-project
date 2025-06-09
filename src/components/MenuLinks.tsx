@@ -5,7 +5,7 @@ import classes from "./MenuLinks.module.css";
 
 const MenuLinks: React.FC = () => {
     return (
-        <ul className={`${classes.menulinks} md:flex`}>
+        <ul className={`${classes.menulinks} md:flex items-center`}>
             <li className="lg:mx-4">
                 <NavLink to="/" className="font-medium md:py-2 md:px-4">Home</NavLink>
             </li>
