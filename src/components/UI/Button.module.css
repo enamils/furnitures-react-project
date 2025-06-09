@@ -1,0 +1,54 @@
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 30px;
+    line-height: 1.5;
+    font-size: 1rem;
+    color: var(--white);
+    background: var(--dark);
+    border-color: var(--dark);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btnPrimary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.btnPrimary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btnSecondary {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--dark);
+}
+
+.btnSecondary:hover {
+    background: var(--secondary-dark);
+    border-color: var(--secondary-dark);
+}
+
+.btnDark {
+    background: var(--dark);
+    border-color: var(--dark);
+}
+
+.btnDark:hover {
+    background: var(--dark-darker);
+    border-color: var(--dark-darker);
+}
+
+.btnOutline {
+    background: transparent;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btnOutline:hover {
+    border-color: rgba(var(--white), 1);
+    color: var(--white);
+}

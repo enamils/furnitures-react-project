@@ -49,8 +49,11 @@
     --white: #ffffff;
     --black: #000000;
     --primary: #3b5d50;
+    --primary-dark: #2a4238;
     --secondary: #f9bf29;
+    --secondary-dark: #b98c1e;
     --dark: #2f2f2f;
+    --dark-darker: #111111;
     --light: #dce5e4;
     --lighter: #eff2f1;
     --body-color: #6a6a6a;
