@@ -1,0 +1,17 @@
+.spotLightedIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+    text-align: center;
+    line-height: 2.6rem;
+    display: inline-block;
+    background: var(--light);
+    color: var(--primary);
+    border-radius: 50%;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+
+    &:hover {
+        background: var(--primary);
+        color: var(--white);
+    }
+}
