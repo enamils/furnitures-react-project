@@ -1,0 +1,19 @@
+.labelControl {
+    display: inline-block;
+    color: var(--black);
+}
+
+.inputControl {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    border-radius: .625rem;
+    height: 3.125rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--body-color);
+    background-color: var(--white);
+    border: 1px solid #cdd4da;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
