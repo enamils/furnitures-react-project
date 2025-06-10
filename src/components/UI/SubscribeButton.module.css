@@ -1,0 +1,14 @@
+.subscribeButton {
+    padding: 12px 30px;
+    border-radius: 10px;
+    background-color: var(--primary);
+    border-color: var(--primary);
+    cursor: pointer;
+    color: var(--white);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+    &:hover {
+        background-color: var(--primary-dark);
+        border-color: var(--primary-dark);
+    }
+}
