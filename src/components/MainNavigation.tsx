@@ -10,7 +10,7 @@ const MainNavigation: React.FC = () => {
     return (
         <header role="banner">
             <div className={`${classes.navbar} py-4 px-10`}>
-                <div className="container max-w-6xl md:flex items-center justify-between mx-auto">
+                <div className="container max-w-screen-xl md:flex items-center justify-between mx-auto">
                     <NavLink to="/" className="text-white text-3xl font-semibold grow inline-block">
                         Furni
                         <span className="opacity-40">.</span>

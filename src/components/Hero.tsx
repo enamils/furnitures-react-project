@@ -12,7 +12,7 @@ const Hero: React.FC<HeroProps> = ({title, text}) => {
     return (
         <div className={classes.hero}>
             <div className="px-10 py-4">
-                <div className="container max-w-6xl md:flex mx-auto">
+                <div className="container max-w-screen-xl md:flex mx-auto">
                     <div className="lg:flex w-full lg:gap-4">
                         <div className="w-full lg:w-5/12">
                             <h1 className="text-white font-bold text-3xl xl:text-5xl 2xl:text-6xl mb-8">{title}</h1>
