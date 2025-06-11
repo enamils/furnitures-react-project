@@ -4,25 +4,28 @@ import {NavLink} from "react-router-dom";
 import classes from "./MenuLinks.module.css";
 
 const MenuLinks: React.FC = () => {
+    const isActiveState = ({ isActive }: { isActive: boolean }) => `${isActive ? classes.active : ""} font-medium md:py-2 md:px-4`;
+
     return (
-        <ul className={`${classes.menulinks} md:flex items-center`}>
+        <ul className={`${classes.menuLinks} md:flex items-center`}>
             <li className="lg:mx-4">
-                <NavLink to="/" className="font-medium md:py-2 md:px-4">Home</NavLink>
+                <NavLink to="/" className={isActiveState} end> Home</NavLink>
             </li>
             <li className="lg:mx-4">
-                <NavLink to="/shop" className="font-medium md:py-2 md:px-4">Shop</NavLink>
+                <NavLink
+                    to="/shop" className={isActiveState}>Shop</NavLink>
             </li>
             <li className="lg:mx-4">
-                <NavLink to="/about" className="font-medium md:py-2 md:px-4">About us</NavLink>
+                <NavLink to="/about" className={isActiveState}>About us</NavLink>
             </li>
             <li className="lg:mx-4">
-                <NavLink to="/services" className="font-medium md:py-2 md:px-4">Services</NavLink>
+                <NavLink to="/services" className={isActiveState}>Services</NavLink>
             </li>
             <li className="lg:mx-4">
-                <NavLink to="/blog" className="font-medium md:py-2 md:px-4">Blog</NavLink>
+                <NavLink to="/blog" className={isActiveState}>Blog</NavLink>
             </li>
             <li className="lg:mx-4">
-                <NavLink to="/contact" className="font-medium md:py-2 md:px-4">Contact us</NavLink>
+                <NavLink to="/contact" className={isActiveState}>Contact us</NavLink>
             </li>
         </ul>
     );
