@@ -1,6 +1,7 @@
 import * as React from "react";
-import sofaImg from "../assets/images/sofa.png";
 import Subscribe from "./Subscribe.tsx";
+import FooterContent from "./FooterContent.tsx";
+import sofaImg from "../assets/images/sofa.png";
 
 const Footer: React.FC = () => {
     return (
@@ -10,9 +11,19 @@ const Footer: React.FC = () => {
                     <img src={sofaImg} alt="sofa" className="max-w-sm"/>
                 </div>
             </div>
-            <div className="px-10 py-4">
+            <div className="px-10">
                 <div className="container max-w-screen-xl mx-auto relative">
                     <Subscribe/>
+                </div>
+            </div>
+            <div className="px-10 mb-12">
+                <div className="container max-w-screen-xl mx-auto relative">
+                    <FooterContent/>
+                </div>
+            </div>
+            <div className="px-10">
+                <div className="container max-w-screen-xl mx-auto relative">
+                    Copyright
                 </div>
             </div>
         </footer>
