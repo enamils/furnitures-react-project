@@ -22,8 +22,14 @@ const Footer: React.FC = () => {
                 </div>
             </div>
             <div className="px-10">
-                <div className="container max-w-screen-xl mx-auto relative">
-                    Copyright
+                <div className="container max-w-screen-xl mx-auto relative border-t-1 border-[color:var(--light)]">
+                    <div className="flex flex-col md:flex-row md:justify-between mt-6">
+                        <p>Copyright ©2025. All Rights Reserved.</p>
+                        <div className="flex gap-4 text-[color:var(--dark)]">
+                            <p>Terms & Conditions</p>
+                            <p>Privacy Policy</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </footer>
