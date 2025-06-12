@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -10,12 +9,19 @@ const currentDir = path.dirname(__filename);
 const app = express();
 const PORT = 5000;
 
-app.use(cors());
-app.use('/assets', express.static(path.join(currentDir, 'public')));
+// CORS
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
+app.use(express.static(path.join(currentDir, 'public')));
 
 app.get('/products', async (req, res) => {
     try {
-        const data = await fs.promises.readFile(path.join(currentDir, 'api/products.json'));
+        const data = await fs.promises.readFile(path.join(currentDir, 'api', 'products.json'), 'utf-8');
         const products = JSON.parse(data);
         res.json(products);
     } catch (err) {
