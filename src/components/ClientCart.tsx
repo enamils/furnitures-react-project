@@ -1,6 +1,7 @@
 import * as React from "react";
 import clientImg from "../assets/images/user.svg";
 import cartImg from "../assets/images/cart.svg";
+import {NavLink} from "react-router-dom";
 
 const ClientCart: React.FC = () => {
     return (
@@ -11,9 +12,9 @@ const ClientCart: React.FC = () => {
                 </button>
             </li>
             <li>
-                <button className="cursor-pointer px-2">
+                <NavLink to="/cart" className="pl-2 pr-2">
                     <img src={cartImg} alt="cart"/>
-                </button>
+                </NavLink>
             </li>
         </ul>
     );

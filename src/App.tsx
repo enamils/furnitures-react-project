@@ -7,6 +7,7 @@ import AboutUsPage from "./pages/AboutUs.tsx";
 import ServicesPage from "./pages/Services.tsx";
 import BlogPage from "./pages/Blog.tsx";
 import ContactUsPage from "./pages/Contact.tsx";
+import CartPage from "./pages/Carts.tsx";
 
 const router = createBrowserRouter([
     {
@@ -18,7 +19,8 @@ const router = createBrowserRouter([
             {path: "about", element: <AboutUsPage />},
             {path: "services", element: <ServicesPage />},
             {path: "blog", element: <BlogPage />},
-            {path: "contact", element: <ContactUsPage />}
+            {path: "contact", element: <ContactUsPage />},
+            {path: "cart", element: <CartPage />}
         ]
     }
 ]);
