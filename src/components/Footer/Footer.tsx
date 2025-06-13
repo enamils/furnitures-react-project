@@ -1,7 +1,7 @@
 import * as React from "react";
 import Subscribe from "./Subscribe.tsx";
 import FooterContent from "./FooterContent.tsx";
-import sofaImg from "../assets/images/sofa.png";
+import sofaImg from "../../assets/images/sofa.png";
 
 const Footer: React.FC = () => {
     return (

@@ -1,6 +1,6 @@
 import * as React from "react";
-import Button from "./UI/Button.tsx";
-import heroImg from "../assets/images/couch.png";
+import Button from "../UI/Button.tsx";
+import heroImg from "../../assets/images/couch.png";
 import classes from "./Hero.module.css";
 
 type HeroProps = {

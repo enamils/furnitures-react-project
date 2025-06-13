@@ -1,7 +1,7 @@
 import * as React from "react";
-import Input from "./UI/Input.tsx";
-import SubscribeButton from "./UI/SubscribeButton.tsx";
-import imgLetterOutline from "../assets/images/envelope-outline.svg"
+import Input from "../UI/Input.tsx";
+import SubscribeButton from "../UI/SubscribeButton.tsx";
+import imgLetterOutline from "../../assets/images/envelope-outline.svg"
 
 const Subscribe: React.FC = () => {
     return (

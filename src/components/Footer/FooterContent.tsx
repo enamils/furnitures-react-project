@@ -1,6 +1,6 @@
 import * as React from "react";
 import {NavLink} from "react-router-dom";
-import SpotLightedIcon from "./UI/SpotLightedIcon.tsx";
+import SpotLightedIcon from "../UI/SpotLightedIcon.tsx";
 import {faFacebookF, faXTwitter, faInstagram, faLinkedinIn} from "@fortawesome/free-brands-svg-icons";
 
 const FooterContent: React.FC = () => {

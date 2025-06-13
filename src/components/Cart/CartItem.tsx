@@ -1,7 +1,7 @@
 import * as React from "react";
-import {useCart} from "../hooks/useCart.ts";
-import {currencyFormatter} from "../utils/formatting.ts";
-import type {CartProductType} from "../type/cartProductType.ts";
+import {useCart} from "../../hooks/useCart.ts";
+import {currencyFormatter} from "../../utils/formatting.ts";
+import type {CartProductType} from "../../type/cartProductType.ts";
 
 type ProductItemProps = {
     product: CartProductType;

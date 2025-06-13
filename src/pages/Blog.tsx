@@ -1,5 +1,5 @@
 import * as React from "react";
-import Hero from "../components/Hero.tsx";
+import Hero from "../components/Hero/Hero.tsx";
 
 const BlogPage: React.FC = () => {
     return (

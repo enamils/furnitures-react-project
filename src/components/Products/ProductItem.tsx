@@ -1,10 +1,10 @@
 import * as React from "react";
 import classes from "./ProductItem.module.css";
 
-import crossImg from "../assets/images/cross.svg";
-import {currencyFormatter} from "../utils/formatting.ts";
-import { useCart } from "../hooks/useCart.ts";
-import type {Product} from "../type/productType.ts";
+import crossImg from "../../assets/images/cross.svg";
+import {currencyFormatter} from "../../utils/formatting.ts";
+import { useCart } from "../../hooks/useCart.ts";
+import type {Product} from "../../type/productType.ts";
 
 type ProductItemProps = {
     product: Product;

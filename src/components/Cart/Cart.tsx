@@ -1,7 +1,7 @@
 import * as React from "react";
 import CartItem from "./CartItem.tsx";
-import { useCart } from "../hooks/useCart.ts";
-import {currencyFormatter} from "../utils/formatting.ts";
+import { useCart } from "../../hooks/useCart.ts";
+import {currencyFormatter} from "../../utils/formatting.ts";
 
 const Cart: React.FC = () => {
     const { cart } = useCart();

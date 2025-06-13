@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
 import ProductItem from "./ProductItem.tsx";
-import type {Product} from "../type/productType.ts";
+import type {Product} from "../../type/productType.ts";
 
 const Products: React.FC = () => {
     const [loadedProducts, setLoadedProducts] = useState<Product[]>([]);

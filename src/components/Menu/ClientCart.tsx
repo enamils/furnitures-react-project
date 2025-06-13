@@ -1,6 +1,6 @@
 import * as React from "react";
-import clientImg from "../assets/images/user.svg";
-import cartImg from "../assets/images/cart.svg";
+import clientImg from "../../assets/images/user.svg";
+import cartImg from "../../assets/images/cart.svg";
 import {NavLink} from "react-router-dom";
 
 const ClientCart: React.FC = () => {
