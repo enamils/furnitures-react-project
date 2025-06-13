@@ -4,7 +4,7 @@
     transition: .3s all ease;
     position: relative;
 
-    @media (min-width: 768px) {
+    @media (width >= 768px) {
         &::before {
             content: "";
             position: absolute;

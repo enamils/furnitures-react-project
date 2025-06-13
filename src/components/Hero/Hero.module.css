@@ -5,12 +5,12 @@
         color: rgba(255, 255, 255, 0.5);
     }
 
-    @media (min-width: 768px) {
-        padding: calc(4rem - 30px) 0 4rem 0;
+    @media (width >= 768px) {
+        padding: calc(4rem - 1.875rem) 0 4rem 0;
     }
 
-    @media (min-width: 992px) {
-        padding: calc(8rem - 30px) 0 8rem 0;
+    @media (width >= 992px) {
+        padding: calc(8rem - 1.875rem) 0 8rem 0;
     }
 
     img {
@@ -20,24 +20,24 @@
         z-index: 2;
         width: 100%;
         max-width: 780px;
-        left: -20px;
+        left: -1.25rem;
 
-        @media (min-width: 768px) {
+        @media (width >= 768px) {
             right: 0;
-            left: -100px;
+            left: -6.25rem;
         }
 
-        @media (min-width: 1024px) {
+        @media (width >= 1024px) {
             position: absolute;
             left: 0;
-            top: -80px;
-            right: -50px;
+            top: -5rem;
+            right: -3.125rem;
         }
 
-        @media (min-width: 1200px) {
+        @media (width >= 1200px) {
             left: 0;
-            top: -80px;
-            right: -100px;
+            top: -5rem;
+            right: -6.25rem;
         }
     }
 }
