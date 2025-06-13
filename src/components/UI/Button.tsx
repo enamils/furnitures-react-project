@@ -1,16 +1,7 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./Button.module.css";
-
-type ButtonProps = {
-    as?: "button" | "link",
-    to?: string, // pour NavLink
-    label: string,
-    className?: string,
-    type?: "button" | "submit", // pour button
-    outlineButtonLink?: boolean,
-    onClick?: React.MouseEventHandler<HTMLButtonElement>,
-}
+import type {ButtonProps} from "../../type/buttonType.ts";
 
 const Button: React.FC<ButtonProps> = ({
        as = "button",

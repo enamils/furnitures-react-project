@@ -8,6 +8,7 @@ import ServicesPage from "./pages/Services.tsx";
 import BlogPage from "./pages/Blog.tsx";
 import ContactUsPage from "./pages/Contact.tsx";
 import CartPage from "./pages/Carts.tsx";
+import CartContextProvider from "./store/CartContext.tsx";
 
 const router = createBrowserRouter([
     {
@@ -26,7 +27,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-    return <RouterProvider router={router} />
+    return (
+        <CartContextProvider>
+            <RouterProvider router={router} />
+        </CartContextProvider>
+    )
 }
 
 export default App
