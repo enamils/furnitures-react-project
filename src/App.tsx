@@ -1,5 +1,6 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import { Toaster } from 'react-hot-toast';
 
 import RootLayout from "./layout/Root.tsx";
 import HomePage from "./pages/Home.tsx";
@@ -33,6 +34,7 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <CartContextProvider>
+                <Toaster position="top-right" />
                 <RouterProvider router={router} />
             </CartContextProvider>
         </QueryClientProvider>

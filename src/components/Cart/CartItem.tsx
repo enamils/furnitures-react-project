@@ -1,4 +1,5 @@
 import * as React from "react";
+import toast from 'react-hot-toast';
 import {useCart} from "../../hooks/useCart.ts";
 import {currencyFormatter} from "../../utils/formatting.ts";
 import type {CartProductType} from "../../type/cartProductType.ts";
@@ -11,6 +12,11 @@ const CartItem: React.FC<ProductItemProps> = ({product}) => {
     const {addToCart, removeFromCart, clearCart} = useCart();
 
     const totalPrice = product.price * product.quantity;
+
+    const clearCartHandler = () => {
+        clearCart(product.id);
+        toast.success(`${product.name} removed from cart!`);
+    }
 
     return (
         <tr>
@@ -28,7 +34,7 @@ const CartItem: React.FC<ProductItemProps> = ({product}) => {
             </td>
             <td className="px-4 py-2 whitespace-nowrap text-center">{currencyFormatter.format(totalPrice)}</td>
             <td className="px-4 py-2 whitespace-nowrap text-center">
-                <button onClick={() => clearCart(product.id)}
+                <button onClick={clearCartHandler}
                         className="text-[color:var(--black)] cursor-pointer">X
                 </button>
             </td>
