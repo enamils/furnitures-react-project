@@ -4,6 +4,7 @@
     position: relative;
     padding-bottom: 3.125rem;
     cursor: pointer;
+    color: var(--dark);
 
     &::before {
         content: "";
@@ -38,7 +39,6 @@
 .title,
 .price {
     font-size: 1rem;
-    color: var(--dark);
     display: block;
 }
 

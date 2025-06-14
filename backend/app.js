@@ -23,7 +23,11 @@ app.get('/products', async (req, res) => {
     try {
         const data = await fs.promises.readFile(path.join(currentDir, 'api', 'products.json'), 'utf-8');
         const products = JSON.parse(data);
-        res.json(products);
+
+        // Simulate a delay to mimic a real API call
+        setTimeout(() => {
+            res.json(products);
+        }, 1000);
     } catch (err) {
         res.status(400).json({ error: 'Error loading products' });
     }

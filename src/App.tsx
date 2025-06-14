@@ -1,4 +1,5 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 import RootLayout from "./layout/Root.tsx";
 import HomePage from "./pages/Home.tsx";
@@ -9,6 +10,8 @@ import BlogPage from "./pages/Blog.tsx";
 import ContactUsPage from "./pages/Contact.tsx";
 import CartPage from "./pages/Carts.tsx";
 import CartContextProvider from "./store/CartContext.tsx";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
     {
@@ -28,9 +31,11 @@ const router = createBrowserRouter([
 
 function App() {
     return (
-        <CartContextProvider>
-            <RouterProvider router={router} />
-        </CartContextProvider>
+        <QueryClientProvider client={queryClient}>
+            <CartContextProvider>
+                <RouterProvider router={router} />
+            </CartContextProvider>
+        </QueryClientProvider>
     )
 }
 

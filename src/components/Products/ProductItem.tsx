@@ -19,6 +19,7 @@ const ProductItem: React.FC<ProductItemProps> = ({product}) => {
                 <img className={`${classes.thumbnail} mb-9`} src={`http://localhost:5000/${product.image}`} alt={product.name} />
                 <span className={classes.title}>{product.name}</span>
                 <span className={classes.price}>{currencyFormatter.format(product.price)}</span>
+                <span>Add to Cart</span>
                 <span className={classes.iconCross}>
                     <img src={crossImg} alt="cross"/>
                 </span>
