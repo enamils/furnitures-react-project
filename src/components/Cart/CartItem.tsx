@@ -2,7 +2,7 @@ import * as React from "react";
 import toast from 'react-hot-toast';
 import {useCart} from "../../hooks/useCart.ts";
 import {currencyFormatter} from "../../utils/formatting.ts";
-import type {CartProductType} from "../../type/cartProductType.ts";
+import type {CartProductType} from "../../types/cartProductType.ts";
 
 type ProductItemProps = {
     product: CartProductType;
@@ -11,9 +11,9 @@ type ProductItemProps = {
 const CartItem: React.FC<ProductItemProps> = ({product}) => {
     const {addToCart, removeFromCart, clearCart} = useCart();
 
-    const totalPrice = product.price * product.quantity;
+    const totalPrice: number = product.price * product.quantity;
 
-    const clearCartHandler = () => {
+    const clearCartHandler: () => void = () => {
         clearCart(product.id);
         toast.success(`${product.name} removed from cart!`);
     }

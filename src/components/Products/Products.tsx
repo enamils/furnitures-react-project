@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useQuery} from "@tanstack/react-query";
 import ProductItem from "./ProductItem.tsx";
-import type {Product} from "../../type/productType.ts";
+import type {Product} from "../../types/productType.ts";
 import ProductSkeleton from "../UI/Skeleton.tsx";
 import ErrorBlock from "../UI/ErrorBlock.tsx";
 

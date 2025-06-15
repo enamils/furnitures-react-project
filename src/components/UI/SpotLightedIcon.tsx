@@ -4,11 +4,7 @@ import type {IconDefinition} from "@fortawesome/fontawesome-svg-core";
 
 import classes from "./SpotLightedIcon.module.css";
 
-type SpotLightedIconProps = {
-    icon: IconDefinition;
-};
-
-const SpotLightedIcon: React.FC<SpotLightedIconProps> = ({icon}) => (
+const SpotLightedIcon: React.FC<{icon: IconDefinition}> = ({icon}) => (
     <a href="#" className={classes.spotLightedIcon}>
         <FontAwesomeIcon icon={icon} size="1x"/>
     </a>

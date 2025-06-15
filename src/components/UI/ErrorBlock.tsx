@@ -1,5 +1,5 @@
 import * as React from "react";
-import type {ErrorType} from "../../type/errorType.ts";
+import type {ErrorType} from "../../types/errorType.ts";
 
 const ErrorBlock: React.FC<ErrorType> = ({title, message}) => {
     return (

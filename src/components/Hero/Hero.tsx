@@ -1,14 +1,10 @@
 import * as React from "react";
 import Button from "../UI/Button.tsx";
+import type {HeroType} from "../../types/heroType.ts";
 import heroImg from "../../assets/images/couch.png";
 import classes from "./Hero.module.css";
 
-type HeroProps = {
-    title: string,
-    text: string,
-}
-
-const Hero: React.FC<HeroProps> = ({title, text}) => {
+const Hero: React.FC<HeroType> = ({title, text}) => {
     return (
         <div className={classes.hero}>
             <div className="px-10 py-4">

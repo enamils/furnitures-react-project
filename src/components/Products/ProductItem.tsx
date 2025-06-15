@@ -5,7 +5,7 @@ import classes from "./ProductItem.module.css";
 import crossImg from "../../assets/images/cross.svg";
 import {currencyFormatter} from "../../utils/formatting.ts";
 import { useCart } from "../../hooks/useCart.ts";
-import type {Product} from "../../type/productType.ts";
+import type {Product} from "../../types/productType.ts";
 
 type ProductItemProps = {
     product: Product;
@@ -14,7 +14,7 @@ type ProductItemProps = {
 const ProductItem: React.FC<ProductItemProps> = ({product}) => {
     const { addToCart } = useCart();
 
-    const addToCartHandler = () => {
+    const addToCartHandler: () => void = () => {
         addToCart({ ...product, quantity: 1 });
         toast.success(`${product.name} add to cart!`);
     }

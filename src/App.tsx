@@ -12,9 +12,9 @@ import ContactUsPage from "./pages/Contact.tsx";
 import CartPage from "./pages/Carts.tsx";
 import CartContextProvider from "./store/CartContext.tsx";
 
-const queryClient = new QueryClient();
+const queryClient: QueryClient = new QueryClient();
 
-const router = createBrowserRouter([
+const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
     {
         path: '/',
         element: <RootLayout />,
@@ -34,7 +34,7 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <CartContextProvider>
-                <Toaster position="top-right" />
+                <Toaster position="top-center" />
                 <RouterProvider router={router} />
             </CartContextProvider>
         </QueryClientProvider>

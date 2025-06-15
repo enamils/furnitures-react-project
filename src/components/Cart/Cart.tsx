@@ -3,12 +3,13 @@ import CartItem from "./CartItem.tsx";
 import {useCart} from "../../hooks/useCart.ts";
 import InfoBlock from "../UI/InfoBlock.tsx";
 import Total from "./Total.tsx";
+import type {CartProductType} from "../../types/cartProductType.ts";
 
 const Cart: React.FC = () => {
     const {cart} = useCart();
 
-    const totalCartPrice = cart.reduce(
-        (sum, product) => sum + product.price * product.quantity,
+    const totalCartPrice: number = cart.reduce(
+        (sum: number, product: CartProductType) => sum + product.price * product.quantity,
         0
     );
 

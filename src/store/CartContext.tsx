@@ -1,7 +1,7 @@
 import {createContext, type ReactNode, useState} from "react";
-import type { CartProductType } from '../type/cartProductType.ts';
+import type { CartProductType } from '../types/cartProductType.ts';
 
-type CartContextType = {
+export type CartContextType = {
     cart: CartProductType[];
     addToCart: (product: CartProductType) => void;
     removeFromCart: (id: string) => void;

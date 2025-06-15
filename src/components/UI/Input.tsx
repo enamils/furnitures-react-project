@@ -1,14 +1,9 @@
 import * as React from "react";
+import type {InputType} from "../../types/inputType.ts";
 
 import classes from "./Input.module.css";
 
-type InpuProps = React.InputHTMLAttributes<HTMLInputElement> & {
-    label?: string;
-    id: string;
-    className?: string;
-}
-
-const Input: React.FC<InpuProps> = ({label, id, className, ...rest}) => {
+const Input: React.FC<InputType> = ({label, id, className, ...rest}) => {
     const cssInput = [
         classes.inputControl,
         className
