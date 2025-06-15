@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
         <footer role="contentinfo" className="bg-white pt-20 pb-20">
             <div className="container max-w-screen-xl mx-auto relative">
                 <div className="absolute -top-[200px] right-0 z-1">
-                    <img src={sofaImg} alt="sofa" className="max-w-sm"/>
+                    <img src={sofaImg} alt="sofa" className="max-w-sm" loading="lazy"/>
                 </div>
             </div>
             <div className="px-10">

@@ -9,7 +9,7 @@ const Subscribe: React.FC = () => {
             <div className="mb-10 mt-28 lg:mt-0 lg:mb-20 relative z-2">
                 <p className="flex text-lg text-[color:var(--primary)] mb-2 font-medium">
                     <span className="mr-1">
-                        <img src={imgLetterOutline} alt="Image"/>
+                        <img src={imgLetterOutline} alt="Image" loading="lazy"/>
                     </span>
                     Subscribe to Newsletter
                 </p>

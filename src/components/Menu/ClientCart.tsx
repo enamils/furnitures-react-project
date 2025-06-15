@@ -13,12 +13,12 @@ const ClientCart: React.FC = () => {
         <ul className="flex md:ml-10 items-center">
             <li className="mr-5">
                 <button className="cursor-pointer px-2">
-                    <img src={clientImg} alt="client"/>
+                    <img src={clientImg} alt="client" loading="lazy"/>
                 </button>
             </li>
             <li>
                 <NavLink to="/cart" className="pl-2 pr-2 flex gap-2">
-                    <img src={cartImg} alt="cart"/>
+                    <img src={cartImg} alt="cart" loading="lazy"/>
                     <span className="text-white">({totalCartItems})</span>
                 </NavLink>
             </li>

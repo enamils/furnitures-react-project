@@ -21,7 +21,7 @@ const CartItem: React.FC<ProductItemProps> = ({product}) => {
     return (
         <tr>
             <td className="px-4 py-2 whitespace-nowrap">
-                <img src={`http://localhost:5000/${product.image}`} alt={product.name} className="w-16 h-16 md:w-40 md:h-40 object-contain"/>
+                <img src={`http://localhost:5000/${product.image}`} alt={product.name} className="w-16 h-16 md:w-25 md:h-25 object-contain" loading="lazy"/>
             </td>
             <td className="px-4 py-2 whitespace-nowrap">{product.name}</td>
             <td className="px-4 py-2 whitespace-nowrap text-center">{currencyFormatter.format(product.price)}</td>

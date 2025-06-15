@@ -24,7 +24,7 @@ const Hero: React.FC<HeroProps> = ({title, text}) => {
                         </div>
                         <div className="w-full lg:w-7/12">
                             <div className="relative">
-                                <img src={heroImg} alt={title}/>
+                                <img src={heroImg} alt={title} loading="lazy"/>
                             </div>
                         </div>
                     </div>

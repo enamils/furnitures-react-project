@@ -22,12 +22,12 @@ const ProductItem: React.FC<ProductItemProps> = ({product}) => {
     return (
         <li>
             <button className={classes.productItem} onClick={addToCartHandler}>
-                <img className={`${classes.thumbnail} mb-9`} src={`http://localhost:5000/${product.image}`} alt={product.name} />
+                <img className={`${classes.thumbnail} mb-9`} src={`http://localhost:5000/${product.image}`} alt={product.name} loading="lazy" />
                 <span className={classes.title}>{product.name}</span>
                 <span className={classes.price}>{currencyFormatter.format(product.price)}</span>
                 <span>Add to Cart</span>
                 <span className={classes.iconCross}>
-                    <img src={crossImg} alt="cross"/>
+                    <img src={crossImg} alt="cross" loading="lazy"/>
                 </span>
             </button>
         </li>
