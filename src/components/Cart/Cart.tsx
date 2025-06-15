@@ -1,8 +1,8 @@
 import * as React from "react";
 import CartItem from "./CartItem.tsx";
 import {useCart} from "../../hooks/useCart.ts";
-import {currencyFormatter} from "../../utils/formatting.ts";
 import InfoBlock from "../UI/InfoBlock.tsx";
+import Total from "./Total.tsx";
 
 const Cart: React.FC = () => {
     const {cart} = useCart();
@@ -34,8 +34,8 @@ const Cart: React.FC = () => {
                             ))}
                         </tbody>
                     </table>
-                    <div className="mt-12">
-                        Total: {currencyFormatter.format(totalCartPrice)}
+                    <div className="md:flex md:justify-end pt-5 pb-28">
+                        <Total priceTotal={totalCartPrice} />
                     </div>
                 </>
             )}

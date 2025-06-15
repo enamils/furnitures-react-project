@@ -7,5 +7,6 @@ export type ButtonProps = {
     className?: string,
     type?: "button" | "submit", // pour button
     outlineButtonLink?: boolean,
+    darkButtonLink?: boolean,
     onClick?: React.MouseEventHandler<HTMLButtonElement>,
 }

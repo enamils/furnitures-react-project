@@ -10,13 +10,18 @@ const Button: React.FC<ButtonProps> = ({
        className = "",
        type = "button",
        outlineButtonLink = false,
+       darkButtonLink = false,
        onClick,
        ...rest
    }) => {
 
     const cssButtonLink = [
         classes.btn,
-        outlineButtonLink ? classes.btnOutline : classes.btnSecondary,
+        outlineButtonLink
+            ? classes.btnOutline
+            : darkButtonLink
+                ? classes.btnDark
+                : classes.btnSecondary,
         className
     ].filter(Boolean).join(" ");
 

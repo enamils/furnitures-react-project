@@ -14,7 +14,7 @@ export const CartContext = createContext<CartContextType | undefined>(undefined)
 const CartContextProvider = ({children}: { children: ReactNode }) => {
     const [cart, setCart] = useState<CartProductType[]>([]);
 
-    const addToCartHandler = (product: CartProductType) => {
+    const addToCartHandler = (product: CartProductType): void => {
         setCart(prev => {
             const existingProduct = prev.find(item => item.id === product.id);
             if (existingProduct) {
@@ -27,7 +27,7 @@ const CartContextProvider = ({children}: { children: ReactNode }) => {
         })
     }
 
-    const removeFromCart = (id: string) => {
+    const removeFromCart = (id: string): void => {
         setCart(prev =>
             prev
                 .map(item =>
@@ -39,11 +39,11 @@ const CartContextProvider = ({children}: { children: ReactNode }) => {
         );
     }
 
-    const clearCartHandler = (id: string) => {
+    const clearCartHandler = (id: string): void => {
         setCart(prev => prev.filter(item => item.id !== id));
     }
 
-    const updateQuantity = (id: string, quantity: number) => {
+    const updateQuantity = (id: string, quantity: number): void => {
         setCart(prev =>
             prev.map(item => (item.id === id ? {...item, quantity} : item))
         );
