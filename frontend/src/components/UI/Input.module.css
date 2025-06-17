@@ -3,7 +3,8 @@
     color: var(--black);
 }
 
-.inputControl {
+.inputControl,
+.textareaControl {
     display: block;
     width: 100%;
     padding: .375rem .75rem;
@@ -16,4 +17,8 @@
     background-color: var(--white);
     border: 1px solid #cdd4da;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.textareaControl {
+    height: auto;
 }
