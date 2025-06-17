@@ -1,5 +1,6 @@
-import {createContext, type ReactNode, useState} from "react";
+import {createContext, useState} from "react";
 import type { CartProductType } from '../types/cartProductType.ts';
+import type {ChildrenType} from "../types/childrenType.ts";
 
 export type CartContextType = {
     cart: CartProductType[];
@@ -11,7 +12,7 @@ export type CartContextType = {
 
 export const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const CartContextProvider = ({children}: { children: ReactNode }) => {
+const CartContextProvider = ({children}: ChildrenType) => {
     const [cart, setCart] = useState<CartProductType[]>([]);
 
     const addToCartHandler = (product: CartProductType): void => {
