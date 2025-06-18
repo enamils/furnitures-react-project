@@ -11,6 +11,7 @@ import BlogPage from "./pages/Blog.tsx";
 import ContactUsPage from "./pages/Contact.tsx";
 import CartPage from "./pages/Carts.tsx";
 import CartContextProvider from "./store/CartContext.tsx";
+import ErrorPage from "./pages/Error.tsx";
 
 const queryClient: QueryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
     {
         path: '/',
         element: <RootLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {index: true, element: <HomePage />},
             {path: "shop", element: <ShopPage />},
