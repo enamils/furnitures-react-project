@@ -12,6 +12,7 @@ import ContactUsPage from "./pages/Contact.tsx";
 import CartPage from "./pages/Carts.tsx";
 import CartContextProvider from "./store/CartContext.tsx";
 import ErrorPage from "./pages/Error.tsx";
+import NewBlogPostPage from "./pages/NewBlogPost.tsx";
 
 const queryClient: QueryClient = new QueryClient();
 
@@ -25,7 +26,16 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
             {path: "shop", element: <ShopPage />},
             {path: "about", element: <AboutUsPage />},
             {path: "services", element: <ServicesPage />},
-            {path: "blog", element: <BlogPage />},
+            {
+                path: "blog",
+                element: <BlogPage />,
+                children: [
+                    {
+                        path: 'new-post',
+                        element: <NewBlogPostPage />
+                    }
+                ],
+            },
             {path: "contact", element: <ContactUsPage />},
             {path: "cart", element: <CartPage />}
         ]

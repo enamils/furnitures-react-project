@@ -4,7 +4,7 @@ import type {HeroType} from "../../types/heroType.ts";
 import heroImg from "../../assets/images/couch.png";
 import classes from "./Hero.module.css";
 
-const Hero: React.FC<HeroType> = ({title, text}) => {
+const Hero: React.FC<HeroType> = ({title, text, newPost}) => {
     return (
         <div className={classes.hero}>
             <div className="px-10 py-4">
@@ -16,6 +16,9 @@ const Hero: React.FC<HeroType> = ({title, text}) => {
                             <div>
                                 <Button as="link" to="/shop" label="Shop Now" className="mr-2" />
                                 <Button as="link" to="/contact" label="Explore" outlineButtonLink />
+                                {newPost && (
+                                    <Button as="link" to="/blog/new-post" label="New Post" className="ml-2" darkButtonLink />
+                                )}
                             </div>
                         </div>
                         <div className="w-full lg:w-7/12">
