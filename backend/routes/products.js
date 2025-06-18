@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     try {
         const filePath = path.join(baseDir, 'products.json');
 
-        // checkle if the file path is within the base directory
+        // check if the file path is within the base directory
         if (!filePath.startsWith(baseDir)) {
             return res.status(400).json({ error: 'Invalid file path' });
         }
