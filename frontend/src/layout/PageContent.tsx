@@ -1,7 +1,7 @@
 import * as React from "react";
 import type {ReactNode} from "react";
 
-const SectionContainer: React.FC<{ children: ReactNode }> = ({children}) => {
+const PageContent: React.FC<{ children: ReactNode }> = ({children}) => {
     return (
         <section className="py-28 px-0">
             <div className="px-10">
@@ -13,4 +13,4 @@ const SectionContainer: React.FC<{ children: ReactNode }> = ({children}) => {
     );
 }
 
-export default SectionContainer;
+export default PageContent;

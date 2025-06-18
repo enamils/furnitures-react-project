@@ -1,6 +1,6 @@
 import * as React from "react";
 import Hero from "../components/Hero/Hero.tsx";
-import SectionContainer from "../layout/Section.tsx";
+import PageContent from "../layout/PageContent.tsx";
 import Products from "../components/Products/Products.tsx";
 
 const ShopPage: React.FC = () => {
@@ -9,9 +9,9 @@ const ShopPage: React.FC = () => {
             <Hero
                 title="Shop"
                 text="Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique." />
-            <SectionContainer>
+            <PageContent>
                 <Products/>
-            </SectionContainer>
+            </PageContent>
         </>
     );
 }
