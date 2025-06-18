@@ -1,7 +1,7 @@
 import express from 'express';
-import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import productsRoutes from './routes/products.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const currentDir = path.dirname(__filename);
@@ -19,18 +19,12 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(currentDir, 'public')));
 
-app.get('/products', async (req, res) => {
-    try {
-        const data = await fs.promises.readFile(path.join(currentDir, 'api', 'products.json'), 'utf-8');
-        const products = JSON.parse(data);
+// ROUTES
+app.use('/products', productsRoutes);
 
-        // Simulate a delay to mimic a real API call
-        setTimeout(() => {
-            res.json(products);
-        }, 1000);
-    } catch (err) {
-        res.status(400).json({ error: 'Error loading products' });
-    }
+// 404 Handler
+app.use((req, res) => {
+    res.status(404).json({ error: 'Route not found' });
 });
 
 app.listen(PORT, () => {
