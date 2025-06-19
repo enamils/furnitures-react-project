@@ -1,6 +1,6 @@
 import * as React from "react";
 
-interface BaseInputProps {
+type BaseInputProps = {
     label?: string;
     id: string;
     className?: string;
