@@ -13,7 +13,7 @@ const ImagePicker: React.FC<ImagePickerType> = ({images, selectedImage, onSelect
                     <li key={path}>
                         <button
                             type="button"
-                            className={`${selectedImage === path ? 'selected' : undefined}`}
+                            className={`${selectedImage === path ? `${classes.selected}` : undefined}`}
                             onClick={() => onSelect(path)}>
                             <img
                                 src={new URL(path, API_URL).toString()}
