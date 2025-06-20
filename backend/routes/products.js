@@ -7,7 +7,7 @@ const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const currentDir = path.dirname(__filename);
 
-// Répertoire de base sécurisé
+// base directory for API files
 const baseDir = path.join(currentDir, '..', 'api');
 
 router.get('/', async (req, res) => {
@@ -22,7 +22,9 @@ router.get('/', async (req, res) => {
         const data = await fs.promises.readFile(filePath, 'utf-8');
         const products = JSON.parse(data);
 
-        res.json(products);
+        setTimeout(() => {
+            res.json(products);
+        }, 1000); // Simulate a delay to mimic a real-world scenario
     } catch (err) {
         console.error('Error reading products.json:', err.message);
         res.status(500).json({ error: 'Failed to load products' });

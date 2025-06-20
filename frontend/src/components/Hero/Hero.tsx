@@ -13,11 +13,11 @@ const Hero: React.FC<HeroType> = ({title, text, newPost}) => {
                         <div className="w-full lg:w-5/12">
                             <h1 className="text-white font-bold text-3xl xl:text-5xl 2xl:text-6xl mb-8">{title}</h1>
                             <p className="mb-6">{text}</p>
-                            <div>
-                                <Button as="link" to="/shop" label="Shop Now" className="mr-2" />
+                            <div className="flex flex-wrap gap-2">
+                                <Button as="link" to="/shop" label="Shop Now" />
                                 <Button as="link" to="/contact" label="Explore" outlineButtonLink />
                                 {newPost && (
-                                    <Button as="link" to="/blog/new-post" label="New Post" className="ml-2" darkButtonLink />
+                                    <Button as="link" to="/blog/new-post" label="Create a New Post" darkButtonLink />
                                 )}
                             </div>
                         </div>

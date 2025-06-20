@@ -1,1 +1,51 @@
-[]
+[
+  {
+    "id": "1750436026294",
+    "author": "Zainab",
+    "title": "A new event !",
+    "image": "images/post-2.jpg",
+    "date": "2025-06-20T16:13:46.294Z"
+  },
+  {
+    "id": "1750441341893",
+    "author": "Robert Fox",
+    "title": "How To Keep Your Furniture Clean",
+    "image": "images/post-2.jpg",
+    "date": "2025-06-20T17:42:21.893Z"
+  },
+  {
+    "id": "1750441406646",
+    "author": "Kristin Watson",
+    "title": "First Time Home Owner Ideas",
+    "image": "images/post-1.jpg",
+    "date": "2025-06-20T17:43:26.646Z"
+  },
+  {
+    "id": "1750441431281",
+    "author": "Kristin Watson",
+    "title": "Small Space Furniture Apartment Ideas",
+    "image": "images/post-3.jpg",
+    "date": "2025-06-20T17:43:51.281Z"
+  },
+  {
+    "id": "1750443211458",
+    "author": "Zainab",
+    "title": "A new event !",
+    "image": "images/post-2.jpg",
+    "date": "2025-06-20T18:13:31.458Z"
+  },
+  {
+    "id": "1750443744625",
+    "author": "Kristin Watson",
+    "title": "A new event !!!",
+    "image": "images/post-3.jpg",
+    "date": "2025-06-20T18:22:24.625Z"
+  },
+  {
+    "id": "1750452713391",
+    "author": "Enamilsag",
+    "title": "Slimane the best dev !",
+    "image": "images/post-1.jpg",
+    "date": "2025-06-20T20:51:53.391Z"
+  }
+]
