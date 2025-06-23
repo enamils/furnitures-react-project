@@ -1,4 +1,4 @@
-import {createContext, useState} from "react";
+import {createContext, useCallback, useMemo, useState} from "react";
 import type { CartProductType } from '../types/cartProductType.ts';
 import type {ChildrenType} from "../types/childrenType.ts";
 
@@ -15,7 +15,7 @@ export const CartContext = createContext<CartContextType | undefined>(undefined)
 const CartContextProvider = ({children}: ChildrenType) => {
     const [cart, setCart] = useState<CartProductType[]>([]);
 
-    const addToCartHandler = (product: CartProductType): void => {
+    const addToCartHandler = useCallback((product: CartProductType): void => {
         setCart(prev => {
             const existingProduct = prev.find(item => item.id === product.id);
             if (existingProduct) {
@@ -26,9 +26,9 @@ const CartContextProvider = ({children}: ChildrenType) => {
             }
             return [...prev, product]
         })
-    }
+    }, []);
 
-    const removeFromCart = (id: string): void => {
+    const removeFromCart = useCallback((id: string): void => {
         setCart(prev =>
             prev
                 .map(item =>
@@ -38,25 +38,27 @@ const CartContextProvider = ({children}: ChildrenType) => {
                 )
                 .filter(item => item.quantity > 0)
         );
-    }
+    }, []);
 
-    const clearCartHandler = (id: string): void => {
+    const clearCartHandler = useCallback((id: string): void => {
         setCart(prev => prev.filter(item => item.id !== id));
-    }
+    }, []);
 
-    const updateQuantity = (id: string, quantity: number): void => {
+    const updateQuantity = useCallback((id: string, quantity: number): void => {
         setCart(prev =>
             prev.map(item => (item.id === id ? {...item, quantity} : item))
         );
-    }
+    }, []);
 
-    const contextValue: CartContextType = {
+    const contextValue: CartContextType = useMemo( () => ({
         cart,
         addToCart: addToCartHandler,
         removeFromCart,
         clearCart: clearCartHandler,
         updateQuantity,
-    }
+    }), [cart, addToCartHandler, removeFromCart, clearCartHandler, updateQuantity]);
+
+    console.log(contextValue);
 
     return (
         <CartContext.Provider value={contextValue}>
