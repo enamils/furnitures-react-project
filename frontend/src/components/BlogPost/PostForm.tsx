@@ -3,10 +3,10 @@ import {type FormEvent, useState} from "react";
 import Input from "../UI/Input.tsx";
 import ImagePicker from "./ImagePicker.tsx";
 import ErrorBlock from "../UI/ErrorBlock.tsx";
-import LoadingIndicator from "../UI/LoadingIndicator.tsx";
 import InfoBlock from "../UI/InfoBlock.tsx";
 import {useImages} from "../../hooks/useImages.ts";
 import type {PostFormType} from "../../types/postFormType.ts";
+import {ImagePickerSkeleton} from "../UI/Skeleton.tsx";
 
 type PostFormProps = {
     onSubmit: (data: PostFormType) => void;
@@ -44,9 +44,14 @@ const PostForm: React.FC<PostFormProps> = ({onSubmit, children}) => {
             <Input id="author" label="Author" type="text" />
 
             {isLoading && (
-                <div className="mt-10">
-                    <LoadingIndicator />
-                </div>
+                <ul className="flex flex-wrap mt-4 gap-4">
+                    {[...Array(3)].map((_, i) => (
+                        <li className="w-60" key={i}>
+
+                            <ImagePickerSkeleton />
+                        </li>
+                    ))}
+                </ul>
             )}
 
             {error && <ErrorBlock title="An error occurred" message="Failed to load images." />}

@@ -17,7 +17,10 @@ const ImagePicker: React.FC<ImagePickerType> = ({images, selectedImage, onSelect
                             onClick={() => onSelect(path)}>
                             <img
                                 src={new URL(path, API_URL).toString()}
-                                alt={caption} loading="lazy"
+                                alt={caption}
+                                loading="lazy"
+                                width="835"
+                                height="577"
                             />
                         </button>
                     </li>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import ProductItem from "./ProductItem.tsx";
-import ProductSkeleton from "../UI/Skeleton.tsx";
+import {ProductSkeleton} from "../UI/Skeleton.tsx";
 import ErrorBlock from "../UI/ErrorBlock.tsx";
 import {useProducts} from "../../hooks/useProducts.ts";
 

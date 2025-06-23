@@ -11,7 +11,7 @@ const ClientCart: React.FC = () => {
     const totalCartItems: number = cart.reduce((total: number, product: CartProductType) => total + product.quantity, 0);
 
     return (
-        <ul className="flex md:ml-10 items-center">
+        <ul className="flex md:ml-10">
             <li className="mr-5">
                 <button className="cursor-pointer px-2">
                     <img src={clientImg} alt="client" loading="lazy"/>

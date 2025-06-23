@@ -11,7 +11,7 @@ const ContactForm: React.FC = () => {
                     <Input id="lastname" label="Last name" type="text" />
                 </div>
                 <Input id="email" label="Email adress" type="email" />
-                <Input className="mb-12" textarea id="textarea" label="Message" type="textarea" cols="30" rows="5" />
+                <Input className="mb-12" textarea id="textarea" label="Message" cols={30} rows={5} />
                 <Button label="Send message" />
             </form>
         </>
