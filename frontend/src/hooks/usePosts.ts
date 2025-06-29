@@ -33,7 +33,7 @@ export const useDeletePost = () => {
         onSuccess: async () => {
             await queryClient.invalidateQueries({
                 queryKey: ['posts'],
-                refetchType: 'none'
+                //refetchType: 'none'
             });
         }
     });
