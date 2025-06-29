@@ -19,12 +19,10 @@ router.get('/', async (req, res) => {
         fs.writeFileSync(postsPath, '[]');
     }
 
-    const postsData = fs.readFileSync(postsPath);
+    const postsData = fs.readFileSync(postsPath, 'utf-8');
     const posts = JSON.parse(postsData);
-    // Simulate a delay to mimic a real-world scenario
-    setTimeout(() => {
-        res.json(posts);
-    }, 1000)
+
+    res.json(posts);
 });
 
 router.get('/images', async (req, res) => {
@@ -39,9 +37,7 @@ router.get('/images', async (req, res) => {
         const data = await fs.promises.readFile(filePath, 'utf-8');
         const images = JSON.parse(data);
 
-        setTimeout(() => {
-            res.json(images);
-        }, 1000); // Simulate a delay to mimic a real-world scenario
+        res.json(images);
     } catch (err) {
         console.error('Error reading images:', err.message);
         res.status(500).json({ error: 'Failed to load images' });
@@ -86,5 +82,32 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: 'Failed to create post' });
     }
 });
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const postsPath = path.join(currentDir, '../api/posts.json');
+
+        if (!fs.existsSync(postsPath)) {
+            return res.status(404).json({ error: 'No post found' });
+        }
+
+        const postsData = fs.readFileSync(postsPath, 'utf-8');
+        let posts = JSON.parse(postsData);
+
+        const postIndex = posts.findIndex(post => post.id === id);
+        if (postIndex === -1) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        posts = posts.filter(post => post.id !== id);
+        fs.writeFileSync(postsPath, JSON.stringify(posts, null, 2));
+
+        res.status(200).json({ message: 'Post deleted successfully.' });
+    } catch (err) {
+        console.error('Error deleting post:', err.message);
+        res.status(500).json({ error: 'Failed to delete post' });
+    }
+})
 
 export default router;

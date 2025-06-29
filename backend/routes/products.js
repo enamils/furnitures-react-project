@@ -22,9 +22,7 @@ router.get('/', async (req, res) => {
         const data = await fs.promises.readFile(filePath, 'utf-8');
         const products = JSON.parse(data);
 
-        setTimeout(() => {
-            res.json(products);
-        }, 1000); // Simulate a delay to mimic a real-world scenario
+        res.json(products);
     } catch (err) {
         console.error('Error reading products.json:', err.message);
         res.status(500).json({ error: 'Failed to load products' });

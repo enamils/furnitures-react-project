@@ -58,8 +58,6 @@ const CartContextProvider = ({children}: ChildrenType) => {
         updateQuantity,
     }), [cart, addToCartHandler, removeFromCart, clearCartHandler, updateQuantity]);
 
-    console.log(contextValue);
-
     return (
         <CartContext.Provider value={contextValue}>
             {children}

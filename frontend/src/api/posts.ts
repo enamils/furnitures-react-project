@@ -34,3 +34,16 @@ export const fetchPost = async (): Promise<PostType[]> => {
 
     return response.json();
 }
+
+export const deletePost = async (id: string): Promise<PostType[]> => {
+    const response = await fetch(`${API_URL}/posts/${id}`, {
+        method: "DELETE",
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to delete post');
+    }
+
+    return response.json();
+}

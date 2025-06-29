@@ -21,7 +21,7 @@ const NewBlogPostPage: React.FC = () => {
                 {!isPending && (
                     <>
                         <Button as="link" label="Cancel" to="../" />
-                        <Button label="Create Post" type="submit" className="mx-4"/>
+                        <Button darkButtonLink label="Create Post" type="submit" className="mx-2 md:mx-4"/>
                     </>
                 )}
                 {isError && (

@@ -27,15 +27,17 @@ const CartItem: React.FC<ProductItemProps> = ({product}) => {
             <td className="px-4 py-2 whitespace-nowrap text-center">{currencyFormatter.format(product.price)}</td>
             <td className="px-4 py-2 whitespace-nowrap">
                 <div className="flex gap-2 items-center justify-center">
-                    <button onClick={() => removeFromCart(product.id)} className="text-xl text-[color:var(--black)] cursor-pointer">-</button>
+                    <button type="button" onClick={() => removeFromCart(product.id)} className="text-xl text-[color:var(--black)] cursor-pointer">-</button>
                     <span className="p-1">{product.quantity}</span>
-                    <button onClick={() => addToCart({ ...product, quantity: 1 })} className="text-xl text-[color:var(--black)] cursor-pointer">+</button>
+                    <button type="button" onClick={() => addToCart({ ...product, quantity: 1 })} className="text-xl text-[color:var(--black)] cursor-pointer">+</button>
                 </div>
             </td>
             <td className="px-4 py-2 whitespace-nowrap text-center">{currencyFormatter.format(totalPrice)}</td>
             <td className="px-4 py-2 whitespace-nowrap text-center">
-                <button onClick={clearCartHandler}
-                        className="text-[color:var(--black)] cursor-pointer">X
+                <button type="button"
+                        onClick={clearCartHandler}
+                        className="text-[color:var(--black)] cursor-pointer">
+                    X
                 </button>
             </td>
         </tr>

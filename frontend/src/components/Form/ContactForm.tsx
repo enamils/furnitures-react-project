@@ -12,7 +12,7 @@ const ContactForm: React.FC = () => {
                 </div>
                 <Input id="email" label="Email adress" type="email" />
                 <Input className="mb-12" textarea id="textarea" label="Message" cols={30} rows={5} />
-                <Button label="Send message" />
+                <Button darkButtonLink label="Send message" />
             </form>
         </>
     );

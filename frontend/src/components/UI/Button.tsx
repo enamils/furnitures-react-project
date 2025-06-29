@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
        ...rest
    }) => {
 
-    const cssButtonLink = [
+    const cssButton = [
         classes.btn,
         outlineButtonLink
             ? classes.btnOutline
@@ -25,15 +25,9 @@ const Button: React.FC<ButtonProps> = ({
         className
     ].filter(Boolean).join(" ");
 
-    const cssButton = [
-        classes.btn,
-        classes.btnDark,
-        className
-    ].filter(Boolean).join(" ");
-
     if (as === "link") {
         return (
-            <NavLink to={to} className={cssButtonLink} {...rest}>
+            <NavLink to={to} className={cssButton} {...rest}>
                 {label}
             </NavLink>
         );

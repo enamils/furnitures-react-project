@@ -1,6 +1,6 @@
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {useNavigate} from "react-router-dom";
-import {createNewPost, fetchPost} from "../api/posts";
+import {createNewPost, deletePost, fetchPost} from "../api/posts";
 import type {PostType} from "../types/postType.ts";
 import type {PostFormType} from "../types/postFormType.ts";
 
@@ -22,5 +22,19 @@ export const useFetchPost = () => {
         queryKey: ['posts'],
         queryFn: fetchPost,
         //staleTime: 5000,
+    });
+}
+
+export const useDeletePost = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation<PostType[], Error, string>({
+        mutationFn: deletePost,
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({
+                queryKey: ['posts'],
+                refetchType: 'none'
+            });
+        }
     });
 }
