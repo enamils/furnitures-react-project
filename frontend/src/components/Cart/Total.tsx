@@ -1,6 +1,6 @@
 import * as React from "react";
-import {currencyFormatter} from "../../utils/formatting.ts";
 import Button from "../UI/Button.tsx";
+import {currencyFormatter} from "../../utils/formatting.ts";
 
 const Total: React.FC<{priceTotal: number}>= ({priceTotal}) => {
     return (

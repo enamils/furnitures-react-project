@@ -10,7 +10,7 @@ import ServicesPage from "./pages/Services.tsx";
 import BlogPage from "./pages/Blog.tsx";
 import ContactUsPage from "./pages/Contact.tsx";
 import CartPage from "./pages/Carts.tsx";
-import CartContextProvider from "./store/CartContext.tsx";
+import CartContextProvider from "./context/CartContext.tsx";
 import ErrorPage from "./pages/Error.tsx";
 import NewBlogPostPage from "./pages/NewBlogPost.tsx";
 

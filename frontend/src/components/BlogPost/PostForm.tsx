@@ -4,9 +4,9 @@ import Input from "../UI/Input.tsx";
 import ImagePicker from "./ImagePicker.tsx";
 import ErrorBlock from "../UI/ErrorBlock.tsx";
 import InfoBlock from "../UI/InfoBlock.tsx";
+import {ImagePickerSkeleton} from "../UI/Skeleton.tsx";
 import {useImages} from "../../hooks/useImages.ts";
 import type {PostFormType} from "../../types/postFormType.ts";
-import {ImagePickerSkeleton} from "../UI/Skeleton.tsx";
 
 type PostFormProps = {
     onSubmit: (data: PostFormType) => void;

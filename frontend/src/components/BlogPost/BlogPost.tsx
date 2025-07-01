@@ -1,13 +1,13 @@
 import * as React from "react";
+import {useState} from "react";
 import Post from "./Post.tsx";
-import {useDeletePost, useFetchPost} from "../../hooks/usePosts.ts";
-import type {PostType} from "../../types/postType.ts";
 import ErrorBlock from "../UI/ErrorBlock.tsx";
 import {PostSkeleton} from "../UI/Skeleton.tsx";
 import InfoBlock from "../UI/InfoBlock.tsx";
-import {useState} from "react";
 import Button from "../UI/Button.tsx";
 import Modal from "../UI/Modal.tsx";
+import {useDeletePost, useFetchPost} from "../../hooks/usePosts.ts";
+import type {PostType} from "../../types/postType.ts";
 
 const BlogPost: React.FC = () => {
     const [isDeleting, setIsDeleting] = useState(false);

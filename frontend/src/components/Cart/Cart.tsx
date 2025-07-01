@@ -1,8 +1,8 @@
 import * as React from "react";
 import CartItem from "./CartItem.tsx";
-import {useCart} from "../../hooks/useCart.ts";
 import InfoBlock from "../UI/InfoBlock.tsx";
 import Total from "./Total.tsx";
+import {useCart} from "../../hooks/useCart.ts";
 import type {CartProductType} from "../../types/cartProductType.ts";
 
 const Cart: React.FC = () => {

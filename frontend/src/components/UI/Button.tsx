@@ -1,7 +1,7 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
-import classes from "./Button.module.css";
 import type {ButtonProps} from "../../types/buttonType.ts";
+import classes from "./Button.module.css";
 
 const Button: React.FC<ButtonProps> = ({
        as = "button",

@@ -1,9 +1,9 @@
 import * as React from "react";
 import PostForm from "../components/BlogPost/PostForm.tsx";
 import Button from "../components/UI/Button.tsx";
+import ErrorBlock from "../components/UI/ErrorBlock.tsx";
 import {usePosts} from "../hooks/usePosts.ts";
 import type {PostFormType} from "../types/postFormType.ts";
-import ErrorBlock from "../components/UI/ErrorBlock.tsx";
 
 const NewBlogPostPage: React.FC = () => {
 
