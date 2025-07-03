@@ -13,9 +13,9 @@ const ClientCart: React.FC = () => {
     return (
         <ul className="flex md:ml-10">
             <li className="mr-5">
-                <button className="cursor-pointer px-2">
+                <NavLink to="/login" className="pl-2 pt-1 pr-2 flex gap-2">
                     <img src={clientImg} alt="client" loading="lazy"/>
-                </button>
+                </NavLink>
             </li>
             <li>
                 <NavLink to="/cart" className="pl-2 pr-2 flex gap-2">

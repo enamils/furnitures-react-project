@@ -15,7 +15,7 @@ const NewBlogPostPage: React.FC = () => {
 
     return (
         <>
-            <h2 className="text-3xl text-[color:var(--dark)] mb-10">Create & Add a new Post on Blog</h2>
+            <h2 className="lg:max-w-[60rem] mx-auto text-3xl text-[color:var(--dark)] mb-10">Create & Add a new Post on Blog</h2>
             <PostForm onSubmit={handleSubmit}>
                 {isPending && <p>Submitting...</p>}
                 {!isPending && (
