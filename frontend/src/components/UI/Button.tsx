@@ -12,6 +12,7 @@ const Button: React.FC<ButtonProps> = ({
        outlineButtonLink = false,
        darkButtonLink = false,
        onClick,
+       children,
        ...rest
    }) => {
 
@@ -29,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
         return (
             <NavLink to={to} className={cssButton} {...rest}>
                 {label}
+                {children}
             </NavLink>
         );
     }
@@ -36,6 +38,7 @@ const Button: React.FC<ButtonProps> = ({
     return (
         <button type={type} className={`${cssButton} cursor-pointer`} onClick={onClick} {...rest}>
             {label}
+            {children}
         </button>
     );
 };

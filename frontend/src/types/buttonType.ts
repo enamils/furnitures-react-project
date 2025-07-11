@@ -9,4 +9,5 @@ export type ButtonProps = {
     outlineButtonLink?: boolean,
     darkButtonLink?: boolean,
     onClick?: React.MouseEventHandler<HTMLButtonElement>,
+    children?: React.ReactNode,
 }
