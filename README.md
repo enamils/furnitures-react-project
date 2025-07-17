@@ -27,3 +27,9 @@ $ npm install
 $ npm start
 ```
 This will start the backend server on port 5000.
+
+## Features
+
+To access blog posts formular, you have to create a user account first. <br>
+then login with your email and password. <br>
+finally you can access the blog posts page and add new posts. <br>

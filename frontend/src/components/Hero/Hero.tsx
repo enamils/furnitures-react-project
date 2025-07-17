@@ -3,8 +3,11 @@ import Button from "../UI/Button.tsx";
 import type {HeroType} from "../../types/heroType.ts";
 import heroImg from "../../assets/images/couch.png";
 import classes from "./Hero.module.css";
+import {useAuthentication} from "../../hooks/useAuthentication.ts";
 
 const Hero: React.FC<HeroType> = ({title, text, newPost}) => {
+    const { isLoggedIn } = useAuthentication();
+
     return (
         <div className={classes.hero}>
             <div className="px-10 py-4">
@@ -16,7 +19,7 @@ const Hero: React.FC<HeroType> = ({title, text, newPost}) => {
                             <div className="flex flex-wrap gap-2">
                                 <Button as="link" to="/shop" label="Shop Now" />
                                 <Button as="link" to="/contact" label="Explore" outlineButtonLink />
-                                {newPost && (
+                                {newPost && isLoggedIn && (
                                     <Button as="link" to="/blog/new-post" label="Create a New Post" darkButtonLink />
                                 )}
                             </div>
