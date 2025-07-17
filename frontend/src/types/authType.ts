@@ -9,13 +9,15 @@ export type AuthContextType = {
 export type AuthResponseType = {
     token: string;
     userId: string;
-    expirationTime: number;
+    expirationTime?: number;
 }
 
-export type AuthHookResult = {
-    token: string | null;
-    userId: string | null;
+export type AuthenticationResultType = {
+    isLogin: boolean;
+    isLoading: boolean;
+    error: string | null;
+    switchMode: () => void;
+    validateAndSubmit: (email: string, password: string, confirmPassword?: string) => boolean;
     isLoggedIn: boolean;
-    login: (token: string, userId: string, expirationTime?: number) => void;
     logout: () => void;
 }

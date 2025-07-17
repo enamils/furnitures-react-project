@@ -2,11 +2,11 @@ import { useCallback } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchStoredAuth, saveAuthData, removeAuthData } from '../api/auth';
 import type {LoginParams, UserData} from "../types/userDataType.ts";
-import type {AuthHookResult} from "../types/authType.ts";
+import type {AuthContextType} from "../types/authType.ts";
 
 export const AUTH_QUERY_KEY = ['auth'];
 
-export const useAuth = (): AuthHookResult => {
+export const useAuth = (): AuthContextType => {
     const queryClient = useQueryClient();
 
     const { data: authData } = useQuery<UserData | null>({

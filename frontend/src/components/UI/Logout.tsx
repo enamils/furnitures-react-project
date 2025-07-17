@@ -1,20 +1,10 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import React from 'react';
 import {faSignOut} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const Logout: React.FC = () => {
-    const authCtx = useContext(AuthContext);
-    const navigate = useNavigate();
-
-    const logoutHandler = () => {
-        authCtx.logout();
-        navigate('/');
-    };
-
+const Logout: React.FC<{onLogout: () => void}> = ({onLogout}) => {
     return (
-        <button className="text-[color:var(--white)] cursor-pointer" type="button" onClick={logoutHandler}>
+        <button className="text-[color:var(--white)] cursor-pointer" type="button" onClick={onLogout}>
             <FontAwesomeIcon icon={faSignOut} size="2xl"/>
         </button>
     )
