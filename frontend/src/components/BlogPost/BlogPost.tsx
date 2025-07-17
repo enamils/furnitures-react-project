@@ -49,7 +49,7 @@ const BlogPost: React.FC = () => {
     return (
         <>
             {isDeleting && (
-                <Modal>
+                <Modal onClose={cancelDelete}>
                     <h2 className="text-2xl mb-2">Are you sure ?</h2>
                     <p>Do you really want to delete this post? This action cannot be undone.</p>
                     {isPending && <p>Deleting, please wait...</p>}

@@ -33,7 +33,7 @@ const ClientCart: React.FC = () => {
         <ul className="flex md:ml-10">
             <li className="mr-5">
                 {isModalLogout && isLoggedIn && (
-                    <Modal>
+                    <Modal onClose={cancelLogout}>
                         <h2 className="text-2xl mb-2">Are you sure ?</h2>
                         <p>Do you really want to logout ?</p>
                         <div className="flex space-x-2 mt-4">
