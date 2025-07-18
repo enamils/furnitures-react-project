@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { NavLink } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import { useCart } from "../../hooks/useCart.ts";
 import type { CartProductType } from "../../types/cartProductType.ts";
 import { useAuthentication } from "../../hooks/useAuthentication";
@@ -13,12 +13,14 @@ const ClientCart: React.FC = () => {
     const [isModalLogout, setIsModalLogout] = useState<boolean>(false);
     const { cart } = useCart();
     const { isLoggedIn, logout } : { isLoggedIn: boolean, logout: () => void } = useAuthentication();
+    const navigate = useNavigate();
 
     const totalCartItems: number = cart.reduce((total: number, product: CartProductType) => total + product.quantity, 0);
 
     const handleLogout = () => {
         logout();
         setIsModalLogout(false);
+        navigate('/');
     }
 
     const cancelLogout = () => {
@@ -35,6 +37,7 @@ const ClientCart: React.FC = () => {
                 {isModalLogout && isLoggedIn && (
                     <Modal onClose={cancelLogout}>
                         <h2 className="text-2xl mb-2">Are you sure ?</h2>
+                        <p>You will be redirected to the home page</p>
                         <p>Do you really want to logout ?</p>
                         <div className="flex space-x-2 mt-4">
                             <Button label="Cancel" onClick={cancelLogout} />
