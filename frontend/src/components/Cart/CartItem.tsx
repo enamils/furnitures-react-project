@@ -8,6 +8,8 @@ type ProductItemProps = {
     product: CartProductType;
 };
 
+const API_URL = import.meta.env.VITE_FURNITURES_URL;
+
 const CartItem: React.FC<ProductItemProps> = ({product}) => {
     const {addToCart, removeFromCart, clearCart} = useCart();
 
@@ -21,7 +23,7 @@ const CartItem: React.FC<ProductItemProps> = ({product}) => {
     return (
         <tr>
             <td className="px-4 py-2 whitespace-nowrap">
-                <img src={`http://localhost:5000/${product.image}`} alt={product.name} className="w-16 h-16 md:w-25 md:h-25 object-contain" loading="lazy"/>
+                <img src={`${API_URL}/${product.image}`} alt={product.name} className="w-16 h-16 md:w-25 md:h-25 object-contain" loading="lazy"/>
             </td>
             <td className="px-4 py-2 whitespace-nowrap">{product.name}</td>
             <td className="px-4 py-2 whitespace-nowrap text-center">{currencyFormatter.format(product.price)}</td>
