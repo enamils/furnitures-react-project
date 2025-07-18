@@ -10,7 +10,7 @@ const Products: React.FC = () => {
     if (isLoading) {
         return (
             <ul className="grid justify-center md:grid-cols-3 lg:grid-cols-4 md:gap-4 lg:gap-3">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(8)].map((_, i) => (
                     <li key={i}>
                         <ProductSkeleton />
                     </li>
@@ -24,7 +24,7 @@ const Products: React.FC = () => {
     }
 
     return (
-        <ul className="grid justify-center md:grid-cols-3 lg:grid-cols-4 md:gap-4 lg:gap-3">
+        <ul className="grid justify-center md:grid-cols-3 lg:grid-cols-4 md:gap-4 lg:gap-3 pb-20">
             {loadedProducts.map((product) => (
                 <ProductItem key={product.id} product={product}/>
             ))}
