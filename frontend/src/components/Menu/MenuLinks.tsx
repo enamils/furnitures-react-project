@@ -7,9 +7,9 @@ const MenuLinks: React.FC = () => {
     const isActiveState = ({ isActive }: { isActive: boolean }) => `${isActive ? classes.active : ""} font-medium md:py-2 md:px-4`;
 
     return (
-        <ul className={`${classes.menuLinks} md:flex items-center`}>
+        <ul className={`${classes.menuLinks} flex flex-col gap-4 md:gap-0 md:flex-row md:items-center`}>
             <li className="lg:mx-4">
-                <NavLink to="/" className={isActiveState} end> Home</NavLink>
+                <NavLink to="/" className={isActiveState} end>Home</NavLink>
             </li>
             <li className="lg:mx-4">
                 <NavLink
