@@ -11,10 +11,11 @@ import type {PostFormType} from "../../types/postFormType.ts";
 type PostFormProps = {
     onSubmit: (data: PostFormType) => void;
     children?: React.ReactNode;
+    initialData?: PostFormType;
 }
 
-const PostForm: React.FC<PostFormProps> = ({onSubmit, children}) => {
-    const [selectedImage, setSelectedImage] = useState<string>('');
+const PostForm: React.FC<PostFormProps> = ({onSubmit, children, initialData}) => {
+    const [selectedImage, setSelectedImage] = useState<string>(initialData?.image || '');
     const {data : loadedImages = [], isLoading, error} = useImages();
 
     const handleSelectImage = (imagePath: string) => {
@@ -40,8 +41,8 @@ const PostForm: React.FC<PostFormProps> = ({onSubmit, children}) => {
 
     return (
         <form className="lg:max-w-[60rem] mx-auto" onSubmit={handleSubmit}>
-            <Input id="title" label="Title" type="text" />
-            <Input id="author" label="Author" type="text" />
+            <Input id="title" label="Title" type="text" defaultValue={initialData?.title} />
+            <Input id="author" label="Author" type="text" defaultValue={initialData?.author} />
 
             {isLoading && (
                 <ul className="flex flex-wrap mt-4 gap-4">

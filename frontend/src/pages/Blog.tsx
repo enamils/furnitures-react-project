@@ -7,6 +7,9 @@ import BlogPost from "../components/BlogPost/BlogPost.tsx";
 const BlogPage: React.FC = () => {
     const location = useLocation();
     const isNewPostPage = location.pathname.includes('/new-post');
+    const isEditPostPage = location.pathname.includes('/edit/');
+
+    const showOutlet = isNewPostPage || isEditPostPage;
 
     return (
         <>
@@ -15,7 +18,7 @@ const BlogPage: React.FC = () => {
                 title="Blog"
                 text="Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique." />
             <PageContent>
-                {isNewPostPage ? <Outlet /> : <BlogPost />}
+                {showOutlet ? <Outlet /> : <BlogPost />}
             </PageContent>
         </>
     );

@@ -10,10 +10,10 @@
     }
 }
 
-.delete {
+.delete,
+.edit {
     position: absolute;
     top: .5rem;
-    right: .5rem;
     background-color: var(--secondary);
     color: var(--dark);
     border-radius: 50%;
@@ -29,6 +29,14 @@
     &:hover {
         background-color: var(--secondary-dark);
     }
+}
+
+.delete {
+    right: .5rem;
+}
+
+.edit {
+    left: .5rem;
 }
 
 .content {

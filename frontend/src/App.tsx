@@ -14,6 +14,7 @@ import CartContextProvider from "./context/CartContext.tsx";
 import ErrorPage from "./pages/Error.tsx";
 import NewBlogPostPage from "./pages/NewBlogPost.tsx";
 import AuthenticationPage from "./pages/Authentication.tsx";
+import EditBlogPostPage from "./pages/EditBlogPost.tsx";
 
 const queryClient: QueryClient = new QueryClient();
 
@@ -34,6 +35,10 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
                     {
                         path: 'new-post',
                         element: <NewBlogPostPage />
+                    },
+                    {
+                        path: 'edit/:postId',
+                        element: <EditBlogPostPage />
                     }
                 ],
             },

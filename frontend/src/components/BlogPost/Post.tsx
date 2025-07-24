@@ -3,6 +3,7 @@ import classes from "./Post.module.css";
 import type {PostType} from "../../types/postType.ts";
 import {formatDate} from "../../utils/formatting.ts";
 import {useAuthentication} from "../../hooks/useAuthentication.ts";
+import EditButton from "./EditButton.tsx";
 
 type PostProps = {
     posts: PostType;
@@ -17,20 +18,22 @@ const Post: React.FC<PostProps> = ({posts,onDelete}) => {
     return (
         <div className="mb-5 relative">
             <img className={classes.thumbnail} src={`${API_URL}/${posts.image}`} alt={posts.title} loading="lazy"/>
-
             {isLoggedIn && (
-                <button
-                    onClick={() => onDelete(posts.id)}
-                    className={classes.delete}
-                    aria-label="delete post"
-                >
-                    &times;
-                </button>
+                <>
+                    <EditButton postId={posts.id} />
+                    <button
+                        onClick={() => onDelete(posts.id)}
+                        className={classes.delete}
+                        aria-label="delete post"
+                    >
+                        &times;
+                    </button>
+                </>
             )}
 
             <a href="#" className={`${classes.content} px-4`}>
                 <h3 className="font-semibold mb-2">{posts.title}</h3>
-                <p>by <span className="font-bold">{posts.author}</span> on
+                <p>by <span className="font-bold">{posts.author}</span> on&nbsp;
                     <span className="font-bold">{formatDate(posts.date)}</span>
                 </p>
             </a>

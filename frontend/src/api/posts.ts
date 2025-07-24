@@ -47,3 +47,19 @@ export const deletePost = async (id: string): Promise<PostType[]> => {
 
     return response.json();
 }
+
+export const updatePost = async (postData: Partial<PostType> & { id: string }): Promise<PostType> => {
+    const response = await fetch(`${API_URL}/posts/${postData.id}`, {
+        method: "PATCH",
+        body: JSON.stringify(postData),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('Échec de la mise à jour du post');
+    }
+
+    return response.json();
+}

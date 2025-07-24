@@ -1,6 +1,7 @@
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {useNavigate} from "react-router-dom";
-import {createNewPost, deletePost, fetchPost} from "../api/posts";
+import toast from 'react-hot-toast';
+import {createNewPost, deletePost, fetchPost, updatePost} from "../api/posts";
 import type {PostType} from "../types/postType.ts";
 import type {PostFormType} from "../types/postFormType.ts";
 
@@ -21,7 +22,6 @@ export const useFetchPost = () => {
     return useQuery<PostType[]>({
         queryKey: ['posts'],
         queryFn: fetchPost,
-        //staleTime: 5000,
     });
 }
 
@@ -31,10 +31,22 @@ export const useDeletePost = () => {
     return useMutation<PostType[], Error, string>({
         mutationFn: deletePost,
         onSuccess: async () => {
-            await queryClient.invalidateQueries({
-                queryKey: ['posts'],
-                //refetchType: 'none'
-            });
+            await queryClient.invalidateQueries({queryKey: ['posts']});
+            toast.success(`The post has been successfully deleted!`);
+        }
+    });
+}
+
+export const useUpdatePost = () => {
+    const queryClient = useQueryClient();
+    const navigate = useNavigate();
+
+    return useMutation<PostType, Error, Partial<PostType> & { id: string }>({
+        mutationFn: updatePost,
+        onSuccess: async (data) => {
+            await queryClient.invalidateQueries({ queryKey: ['posts'] });
+            toast.success(`The post "${data.title}" has been successfully updated!`);
+            navigate('/blog');
         }
     });
 }

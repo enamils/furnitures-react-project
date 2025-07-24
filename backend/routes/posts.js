@@ -108,6 +108,47 @@ router.delete('/:id', async (req, res) => {
         console.error('Error deleting post:', err.message);
         res.status(500).json({ error: 'Failed to delete post' });
     }
-})
+});
+
+router.patch('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { author, title, image } = req.body;
+
+        // Checking required fields
+        if (!author?.trim() || !title?.trim() || !image?.trim()) {
+            return res.status(400).json({ error: 'The author, title and image fields are required.' });
+        }
+
+        const postsPath = path.join(currentDir, '../api/posts.json');
+
+        if (!fs.existsSync(postsPath)) {
+            return res.status(404).json({ error: 'No posts found' });
+        }
+
+        const postsData = fs.readFileSync(postsPath, 'utf-8');
+        let posts = JSON.parse(postsData);
+
+        const postIndex = posts.findIndex(post => post.id === id);
+        if (postIndex === -1) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        // Update the post while keeping the id and date
+        posts[postIndex] = {
+            ...posts[postIndex],
+            author,
+            title,
+            image
+        };
+
+        fs.writeFileSync(postsPath, JSON.stringify(posts, null, 2));
+
+        res.status(200).json(posts[postIndex]);
+    } catch (err) {
+        console.error('Error updating post:', err.message);
+        res.status(500).json({ error: 'Failed to update post' });
+    }
+});
 
 export default router;
