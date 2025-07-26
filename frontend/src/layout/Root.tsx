@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Outlet} from "react-router-dom";
+import {Outlet, ScrollRestoration} from "react-router-dom";
 
 import MainNavigation from "../components/Menu/MainNavigation.tsx";
 import Footer from "../components/Footer/Footer.tsx";
@@ -12,6 +12,7 @@ const RootLayout: React.FC = () => {
                 <Outlet />
             </main>
             <Footer />
+            <ScrollRestoration />
         </>
   );
 }
