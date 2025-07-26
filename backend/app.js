@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import productsRoutes from './routes/products.js';
 import postRoutes from './routes/posts.js';
 import authRoutes from './routes/auth.js';
+import teamsRoutes from './routes/teams.js';
 
 const app = express();
 const PORT = 5000;
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/products', productsRoutes);
 app.use('/posts', postRoutes);
 app.use('/auth', authRoutes);
+app.use('/teams', teamsRoutes);
 
 // 404 Handler
 app.use((req, res) => {
