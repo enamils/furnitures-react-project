@@ -26,7 +26,7 @@ const Hero: React.FC<HeroType> = ({title, text, newPost}) => {
                         </div>
                         <div className="w-full lg:w-7/12">
                             <div className="relative">
-                                <img src={heroImg} alt={title} loading="lazy"/>
+                                <img src={heroImg} alt={title} fetchPriority="high" loading="eager"/>
                             </div>
                         </div>
                     </div>
