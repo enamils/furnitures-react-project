@@ -15,6 +15,7 @@ import ErrorPage from "./pages/Error.tsx";
 import NewBlogPostPage from "./pages/NewBlogPost.tsx";
 import AuthenticationPage from "./pages/Authentication.tsx";
 import EditBlogPostPage from "./pages/EditBlogPost.tsx";
+import ProtectedRoute from "./components/Menu/ProtectedRoute.tsx";
 
 const queryClient: QueryClient = new QueryClient();
 
@@ -33,13 +34,12 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
                 element: <BlogPage />,
                 children: [
                     {
-                        path: 'new-post',
-                        element: <NewBlogPostPage />
+                        element: <ProtectedRoute />,
+                        children: [
+                            {path: "new-post", element: <NewBlogPostPage />},
+                            {path: "edit/:postId", element: <EditBlogPostPage />}
+                        ]
                     },
-                    {
-                        path: 'edit/:postId',
-                        element: <EditBlogPostPage />
-                    }
                 ],
             },
             {path: "contact", element: <ContactUsPage />},

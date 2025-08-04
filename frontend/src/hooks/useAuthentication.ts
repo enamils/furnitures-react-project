@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import { useAuth } from "./useAuth";
 import { authService } from "../services/auth-services";
 import type {AuthenticationResultType, AuthResponseType} from "../types/authType";
@@ -10,6 +10,8 @@ export const useAuthentication = (): AuthenticationResultType => {
     const [validationError, setValidationError] = useState<string | null>(null);
     const auth = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const loginMutation = useMutation({
         mutationFn: async ({ email, password }: { email: string; password: string }) => {
@@ -17,7 +19,7 @@ export const useAuthentication = (): AuthenticationResultType => {
         },
         onSuccess: (data: AuthResponseType) => {
             auth.login(data.token, data.userId, data.expirationTime || 3600000);
-            navigate('/');
+            navigate(from, { replace: true });
         }
     });
 
@@ -27,7 +29,7 @@ export const useAuthentication = (): AuthenticationResultType => {
         },
         onSuccess: (data: AuthResponseType) => {
             auth.login(data.token, data.userId, data.expirationTime || 3600000);
-            navigate('/');
+            navigate(from, { replace: true });
         }
     });
 
