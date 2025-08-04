@@ -15,8 +15,9 @@ export const useAuth = (): AuthContextType => {
         staleTime: Infinity,
         gcTime: Infinity,
         refetchOnWindowFocus: false,
-        refetchOnMount: true,
+        refetchOnMount: false,
         refetchOnReconnect: false,
+        initialData: fetchStoredAuth
     });
 
     const { mutate: login } = useMutation<UserData, Error, LoginParams>({
