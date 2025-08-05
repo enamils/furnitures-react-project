@@ -14,7 +14,7 @@ const Total: React.FC<{priceTotal: number}>= ({priceTotal}) => {
                 <p>Total</p>
                 <p className="font-bold">{currencyFormatter.format(priceTotal)}</p>
             </div>
-            <Button label="Proceed to checkout" darkButtonLink className="py-4" onClick={() => console.log("proceed to checkout")} />
+            <Button as="link" to="checkout"  label="Proceed to checkout" darkButtonLink className="py-4" />
         </div>
     );
 }

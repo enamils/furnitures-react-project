@@ -16,6 +16,7 @@ import NewBlogPostPage from "./pages/NewBlogPost.tsx";
 import AuthenticationPage from "./pages/Authentication.tsx";
 import EditBlogPostPage from "./pages/EditBlogPost.tsx";
 import ProtectedRoute from "./components/Menu/ProtectedRoute.tsx";
+import CheckoutPage from "./pages/Checkout.tsx";
 
 const queryClient: QueryClient = new QueryClient();
 
@@ -44,7 +45,16 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
             },
             {path: "contact", element: <ContactUsPage />},
             {path: "login", element: <AuthenticationPage />},
-            {path: "cart", element: <CartPage />}
+            {
+                path: "cart",
+                element: <CartPage />,
+                children: [
+                    {
+                        path: "checkout",
+                        element: <CheckoutPage />
+                    }
+                ]
+            }
         ]
     }
 ]);
