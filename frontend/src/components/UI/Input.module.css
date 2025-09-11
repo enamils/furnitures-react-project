@@ -4,7 +4,8 @@
 }
 
 .inputControl,
-.textareaControl {
+.textareaControl,
+.selectControl {
     display: block;
     width: 100%;
     padding: .375rem .75rem;
