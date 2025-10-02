@@ -50,13 +50,8 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
                 element: <CartPage />,
                 children: [
                     {
-                        element: <ProtectedRoute/>,
-                        children: [
-                            {
-                                path: "checkout",
-                                element: <CheckoutPage/>
-                            }
-                        ]
+                        path: "checkout",
+                        element: <CheckoutPage/>
                     }
                 ],
             }
