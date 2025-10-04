@@ -9,3 +9,14 @@ export const useProducts = (): UseQueryResult<Product[], Error> => {
         staleTime: 5000,
     });
 };
+
+export const useFeaturedProducts = (): UseQueryResult<Product[], Error> => {
+    return useQuery<Product[], Error>({
+        queryKey: ['featured-products'],
+        queryFn: async () => {
+            const products = await fetchProducts();
+            return products.slice(0, 3);
+        },
+        staleTime: 5000,
+    });
+};
