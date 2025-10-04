@@ -67,9 +67,9 @@ const BlogPost: React.FC = () => {
                 </Modal>
             )}
             {loadedPost.length === 0 && <InfoBlock message="No Post available. Please create a new one !"/>}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 md:gap-4 lg:gap-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-4 lg:gap-5">
                 {loadedPost.map((post: PostType) => (
-                    <Post key={post.id} posts={post} onDelete={confirmDelete} />
+                    <Post key={post.id} posts={post} onDelete={confirmDelete} showActions={true} />
                 ))}
             </div>
         </>

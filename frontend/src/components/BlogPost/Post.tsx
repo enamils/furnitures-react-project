@@ -7,18 +7,19 @@ import EditButton from "./EditButton.tsx";
 
 type PostProps = {
     posts: PostType;
-    onDelete: (id: string) => void;
+    onDelete?: (id: string) => void;
+    showActions?: boolean;
 }
 
 const API_URL = import.meta.env.VITE_FURNITURES_URL;
 
-const Post: React.FC<PostProps> = ({posts,onDelete}) => {
+const Post: React.FC<PostProps> = ({posts,onDelete,showActions = true}) => {
     const { isLoggedIn } = useAuthentication();
 
     return (
         <div className="mb-5 relative">
             <img className={classes.thumbnail} src={`${API_URL}/${posts.image}`} alt={posts.title} loading="lazy"/>
-            {isLoggedIn && (
+            {isLoggedIn && showActions && onDelete && (
                 <>
                     <EditButton postId={posts.id} />
                     <button

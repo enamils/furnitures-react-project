@@ -50,3 +50,16 @@ export const useUpdatePost = () => {
         }
     });
 }
+
+export const useLatestPosts = (limit: number = 3) => {
+    return useQuery<PostType[]>({
+        queryKey: ['posts', 'latest', limit],
+        queryFn: async () => {
+            const posts = await fetchPost();
+            // Sort by date (newest first) and limit
+            return posts
+                .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                .slice(0, limit);
+        },
+    });
+}
