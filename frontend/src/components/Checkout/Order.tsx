@@ -5,7 +5,11 @@ import Button from "../UI/Button.tsx";
 import {currencyFormatter} from "../../utils/formatting.ts";
 import type {CartProductType} from "../../types/cartProductType.ts";
 
-const Order: React.FC = () => {
+interface OrderProps {
+    isPending: boolean;
+}
+
+const Order: React.FC<OrderProps> = ({ isPending }) => {
     const {cart} = useCart();
 
     const cartSubtotal: number = cart.reduce((sum: number, product: CartProductType) => sum + product.price * product.quantity, 0);
@@ -51,7 +55,13 @@ const Order: React.FC = () => {
                     <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
                 </Accordion>
 
-                <Button label="Place Order" darkButtonLink className="mt-6" />
+                <Button
+                    type="submit"
+                    label={isPending ? 'Loading...' : 'Place Order'}
+                    darkButtonLink
+                    disabled={isPending || cart.length === 0}
+                    className="mt-6"
+                />
             </div>
         </div>
     )

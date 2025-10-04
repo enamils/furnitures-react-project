@@ -38,3 +38,11 @@ export const TeamsProfileSkeleton: React.FC = () => {
         </>
     );
 }
+
+export const OrderConfirmationSkeleton: React.FC = () => {
+    return (
+        <div className="mb-10">
+            <div className="animate-pulse bg-gray-200 h-96 w-full rounded mb-5" />
+        </div>
+    );
+}

@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import Select from "../UI/Select.tsx";
 import Input from "../UI/Input.tsx";
+import type { ValidationErrors } from "../../utils/validation.ts";
 
-const BillingDetails: React.FC = () => {
+interface BillingDetailsProps {
+    errors: ValidationErrors;
+}
+
+const BillingDetails: React.FC<BillingDetailsProps> = ({ errors }) => {
     const [showAccountInfo, setShowAccountInfo] = useState<boolean>(false);
 
     const handleCreateAccountChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -18,32 +23,87 @@ const BillingDetails: React.FC = () => {
                     label="Country"
                     className="mb-1"
                     options={[
-                        { value: "fr", label: "France" },
-                        { value: "be", label: "Belgium" },
-                        { value: "ch", label: "Switzerland" },
-                        { value: "ca", label: "Canada" },
-                        { value: "us", label: "United States" },
+                        { value: "FRANCE", label: "France" },
+                        { value: "BELGIUM", label: "Belgium" },
+                        { value: "SWITZERLAND", label: "Switzerland" },
+                        { value: "CANADA", label: "Canada" },
+                        { value: "USA", label: "United States" },
                     ]}
                     name="country"
                     required
+                    error={errors.country}
                 />
 
                 <div className="grid md:grid-cols-2 md:gap-4 mb-1">
-                    <Input id="firstName" label="First Name" name="firstName" required />
-                    <Input id="lastName" label="Last Name" name="lastName" required />
+                    <Input
+                        id="firstName"
+                        label="First Name"
+                        name="firstName"
+                        required
+                        error={errors.firstName}
+                    />
+                    <Input
+                        id="lastName"
+                        label="Last Name"
+                        name="lastName"
+                        required
+                        error={errors.lastName}
+                    />
                 </div>
 
-                <Input id="adress" label="Adress" placeholder="Street adress" className="mb-1" name="adress" required />
-                <Input id="apartment" label="Adress" placeholder="Apartment, suite, unit etc." className="mb-1" name="apartment" />
+                <Input
+                    id="address"
+                    label="Address"
+                    placeholder="Street address"
+                    className="mb-1"
+                    name="address"
+                    required
+                    error={errors.address}
+                />
+                <Input
+                    id="apartment"
+                    label="Apartment"
+                    placeholder="Apartment, suite, unit etc."
+                    className="mb-1"
+                    name="apartment"
+                />
 
                 <div className="grid md:grid-cols-2 md:gap-4 mb-1">
-                    <Input id="state" label="State / Country" name="state" required />
-                    <Input id="cp" label="Postal / Zip" type="text" pattern="[0-9]{5}" name="cp" required />
+                    <Input
+                        id="state"
+                        label="State / Country"
+                        name="state"
+                        required
+                        error={errors.state}
+                    />
+                    <Input
+                        id="postalCode"
+                        label="Postal / Zip"
+                        type="text"
+                        pattern="[0-9]{5}"
+                        name="postalCode"
+                        required
+                        error={errors.postalCode}
+                    />
                 </div>
 
                 <div className="grid md:grid-cols-2 md:gap-4">
-                    <Input id="email" label="Email Adress" type="email" name="email" required />
-                    <Input id="tel" label="Phone" type="tel" name="tel" required />
+                    <Input
+                        id="email"
+                        label="Email Address"
+                        type="email"
+                        name="email"
+                        required
+                        error={errors.email}
+                    />
+                    <Input
+                        id="phone"
+                        label="Phone"
+                        type="tel"
+                        name="phone"
+                        required
+                        error={errors.phone}
+                    />
                 </div>
 
                 <div className="mt-12">

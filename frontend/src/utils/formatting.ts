@@ -13,3 +13,8 @@ export const formatDate = (date: Date | string | number): string => {
         year: 'numeric'
     }).format(dateObject);
 };
+
+export const formatDateShort = (date: Date | string | number): string => {
+    const dateObject = date instanceof Date ? date : new Date(date);
+    return new Intl.DateTimeFormat('fr-FR').format(dateObject);
+};

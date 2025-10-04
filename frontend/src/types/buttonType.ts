@@ -10,4 +10,5 @@ export type ButtonProps = {
     darkButtonLink?: boolean,
     onClick?: React.MouseEventHandler<HTMLButtonElement>,
     children?: React.ReactNode,
+    disabled?: boolean | undefined,
 }

@@ -6,7 +6,8 @@ export type CartContextType = {
     cart: CartProductType[];
     addToCart: (product: CartProductType) => void;
     removeFromCart: (id: string) => void;
-    clearCart: (id: string) => void;
+    clearCartItem: (id: string) => void;
+    clearCart: () => void;
     updateQuantity: (id: string, quantity: number) => void;
 };
 
@@ -40,8 +41,12 @@ const CartContextProvider = ({children}: ChildrenType) => {
         );
     }, []);
 
-    const clearCartHandler = useCallback((id: string): void => {
+    const clearCartItemHandler = useCallback((id: string): void => {
         setCart(prev => prev.filter(item => item.id !== id));
+    }, []);
+
+    const clearCartHandler = useCallback((): void => {
+        setCart([]);
     }, []);
 
     const updateQuantity = useCallback((id: string, quantity: number): void => {
@@ -54,9 +59,10 @@ const CartContextProvider = ({children}: ChildrenType) => {
         cart,
         addToCart: addToCartHandler,
         removeFromCart,
+        clearCartItem: clearCartItemHandler,
         clearCart: clearCartHandler,
         updateQuantity,
-    }), [cart, addToCartHandler, removeFromCart, clearCartHandler, updateQuantity]);
+    }), [cart, addToCartHandler, removeFromCart, clearCartItemHandler, clearCartHandler, updateQuantity]);
 
     return (
         <CartContext.Provider value={contextValue}>

@@ -11,12 +11,12 @@ type ProductItemProps = {
 const API_URL = import.meta.env.VITE_FURNITURES_URL;
 
 const CartItem: React.FC<ProductItemProps> = ({product}) => {
-    const {addToCart, removeFromCart, clearCart} = useCart();
+    const {addToCart, removeFromCart, clearCartItem} = useCart();
 
     const totalPrice: number = product.price * product.quantity;
 
     const clearCartHandler: () => void = () => {
-        clearCart(product.id);
+        clearCartItem(product.id);
         toast.success(`${product.name} removed from cart!`);
     }
 

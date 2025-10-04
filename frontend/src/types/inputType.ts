@@ -4,6 +4,7 @@ type BaseInputProps = {
     label?: string;
     id: string;
     className?: string;
+    error?: string;
 }
 
 type InputProps = BaseInputProps & {

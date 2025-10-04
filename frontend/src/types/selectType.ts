@@ -10,4 +10,5 @@ export type SelectProps = {
     id: string;
     className?: string;
     options: SelectOptionType[];
+    error?: string;
 } & React.SelectHTMLAttributes<HTMLSelectElement>;

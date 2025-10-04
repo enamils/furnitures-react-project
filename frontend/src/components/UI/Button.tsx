@@ -13,6 +13,7 @@ const Button: React.FC<ButtonProps> = ({
        darkButtonLink = false,
        onClick,
        children,
+       disabled = false,
        ...rest
    }) => {
 
@@ -36,7 +37,7 @@ const Button: React.FC<ButtonProps> = ({
     }
 
     return (
-        <button type={type} className={`${cssButton} cursor-pointer`} onClick={onClick} {...rest}>
+        <button disabled={disabled} type={type} className={`${cssButton}`} onClick={onClick} {...rest}>
             {label}
             {children}
         </button>

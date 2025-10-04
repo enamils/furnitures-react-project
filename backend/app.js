@@ -5,6 +5,7 @@ import productsRoutes from './routes/products.js';
 import postRoutes from './routes/posts.js';
 import authRoutes from './routes/auth.js';
 import teamsRoutes from './routes/teams.js';
+import ordersRoutes from './routes/orders.js';
 
 const app = express();
 const PORT = 5000;
@@ -28,6 +29,7 @@ app.use('/products', productsRoutes);
 app.use('/posts', postRoutes);
 app.use('/auth', authRoutes);
 app.use('/teams', teamsRoutes);
+app.use('/orders', ordersRoutes);
 
 // 404 Handler
 app.use((req, res) => {

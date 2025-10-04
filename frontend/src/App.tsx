@@ -17,6 +17,7 @@ import AuthenticationPage from "./pages/Authentication.tsx";
 import EditBlogPostPage from "./pages/EditBlogPost.tsx";
 import ProtectedRoute from "./components/Menu/ProtectedRoute.tsx";
 import CheckoutPage from "./pages/Checkout.tsx";
+import OrderConfirmationPage from "./pages/OrderConfirmation.tsx";
 
 const queryClient: QueryClient = new QueryClient();
 
@@ -54,7 +55,13 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
                         element: <CheckoutPage/>
                     }
                 ],
-            }
+            },
+            {
+                element: <ProtectedRoute />,
+                children: [
+                    {path: "order-confirmation/:orderId", element: <OrderConfirmationPage />}
+                ]
+            },
         ]
     }
 ]);
