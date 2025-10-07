@@ -4,7 +4,7 @@ import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
 import classes from "./SubscribeButton.module.css";
 
 const SubscribeButton: React.FC = () => (
-    <button className={classes.subscribeButton}>
+    <button className={classes.subscribeButton} type="button">
         <FontAwesomeIcon icon={faPaperPlane} size="lg"/>
     </button>
 )

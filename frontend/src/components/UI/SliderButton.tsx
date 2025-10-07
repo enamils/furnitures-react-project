@@ -4,7 +4,7 @@ import classes from "./SliderButton.module.css";
 type SliderButtonProps = {
     className?: string,
     rightArrow?: boolean
-}
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 
 const SliderButton: React.FC<SliderButtonProps>= ({className = "", rightArrow = false, ...rest}) => {

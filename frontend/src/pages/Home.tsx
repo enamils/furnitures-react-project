@@ -4,6 +4,8 @@ import PageContent from "../layout/PageContent.tsx";
 import LatestPosts from "../components/BlogPost/LatestPosts.tsx";
 import FeaturedProducts from "../components/Products/FeaturedProducts.tsx";
 import PopularProductItem from "../components/Products/PopularProductItem.tsx";
+import Slider from "../components/UI/Slider.tsx";
+import {testimonialSlides} from "../data/sliderData.ts";
 
 import product1Img from "../assets/images/product-1.png";
 import product2Img from "../assets/images/product-2.png";
@@ -22,6 +24,11 @@ const HomePage: React.FC = () => {
                     <PopularProductItem name="Kruzo Aero Chair" image={product2Img} />
                     <PopularProductItem name="Ergonomic Chair" image={product3Img} />
                 </div>
+
+                <div className="my-16">
+                    <Slider slides={testimonialSlides} />
+                </div>
+
                 <LatestPosts limit={3} />
             </PageContent>
         </>
