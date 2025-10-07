@@ -1,0 +1,15 @@
+.sliderButton {
+    cursor: pointer;
+    width: 3.625rem;
+    height: 3.625rem;
+    border-radius: 50%;
+    background-color: var(--light);
+    color: var(--dark);
+    font-size: 1.5rem;
+    transition: .3s all ease;
+
+    &:hover {
+        background-color: var(--primary-dark);
+        color: var(--white);
+    }
+}
