@@ -10,7 +10,7 @@ const Hero: React.FC<HeroType> = ({title, text, newPost}) => {
 
     return (
         <div className={classes.hero}>
-            <div className="px-10 py-4">
+            <div className="px-5 md:px-10 py-4">
                 <div className="container max-w-screen-xl md:flex mx-auto">
                     <div className="lg:flex w-full lg:gap-4">
                         <div className="w-full lg:w-5/12">

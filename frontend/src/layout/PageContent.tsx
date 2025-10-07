@@ -4,7 +4,7 @@ import type {ReactNode} from "react";
 const PageContent: React.FC<{ children: ReactNode }> = ({children}) => {
     return (
         <section className="py-28 px-0">
-            <div className="px-10">
+            <div className="px-5 md:px-10">
                 <div className="container max-w-screen-xl mx-auto">
                     {children}
                 </div>

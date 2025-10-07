@@ -16,7 +16,7 @@ const MainNavigation: React.FC = () => {
 
     return (
         <header role="banner">
-            <div className={`${classes.navbar} py-4 px-10`}>
+            <div className={`${classes.navbar} py-4 px-5 md:px-10`}>
                 <div className="container max-w-screen-xl md:flex items-center justify-between mx-auto">
                     <div className="flex md:block">
                         <NavLink to="/" className="text-white text-3xl font-semibold grow inline-block">

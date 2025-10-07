@@ -11,17 +11,17 @@ const Footer: React.FC = () => {
                     <img src={sofaImg} alt="sofa" width="571" height="494" className="max-w-sm" fetchPriority="high" loading="eager"/>
                 </div>
             </div>
-            <div className="px-10">
+            <div className="px-5 md:px-10">
                 <div className="container max-w-screen-xl mx-auto relative">
                     <Subscribe/>
                 </div>
             </div>
-            <div className="px-10 mb-12">
+            <div className="px-5 md:px-10 mb-12">
                 <div className="container max-w-screen-xl mx-auto relative">
                     <FooterContent/>
                 </div>
             </div>
-            <div className="px-10">
+            <div className="px-5 md:px-10">
                 <div className="container max-w-screen-xl mx-auto relative border-t-1 border-[color:var(--light)]">
                     <div className="flex flex-col md:flex-row md:justify-between mt-6">
                         <p>Copyright ©2025. All Rights Reserved.</p>
