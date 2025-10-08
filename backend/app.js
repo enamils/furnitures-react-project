@@ -25,11 +25,11 @@ app.use(express.static(path.join(currentDir, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
 // ROUTES
-app.use('/products', productsRoutes);
-app.use('/posts', postRoutes);
-app.use('/auth', authRoutes);
-app.use('/teams', teamsRoutes);
-app.use('/orders', ordersRoutes);
+app.use('/api/products', productsRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/teams', teamsRoutes);
+app.use('/api/orders', ordersRoutes);
 
 // 404 Handler
 app.use((req, res) => {

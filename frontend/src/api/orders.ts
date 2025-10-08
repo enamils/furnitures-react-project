@@ -3,7 +3,7 @@ import type { CheckoutOrderType, CheckoutResponseType } from '../types/checkoutT
 const API_URL = import.meta.env.VITE_FURNITURES_URL;
 
 export const createOrder = async (orderData: Omit<CheckoutOrderType, 'orderDate'>): Promise<CheckoutResponseType> => {
-    const response = await fetch(`${API_URL}/orders`, {
+    const response = await fetch(`${API_URL}/api/orders`, {
         method: 'POST',
         body: JSON.stringify(orderData),
         headers: {
