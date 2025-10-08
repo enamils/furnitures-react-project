@@ -8,14 +8,42 @@
       }
     },
     {
-      "src": "backend/vercel/**/*.js",
+      "src": "backend/vercel/*.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/backend/vercel/$1.js"
+      "src": "/api/auth/(register|login)",
+      "dest": "/backend/vercel/auth.js"
+    },
+    {
+      "src": "/api/posts/images",
+      "dest": "/backend/vercel/posts.js"
+    },
+    {
+      "src": "/api/posts/([^/]+)",
+      "dest": "/backend/vercel/posts.js"
+    },
+    {
+      "src": "/api/posts",
+      "dest": "/backend/vercel/posts.js"
+    },
+    {
+      "src": "/api/orders/([^/]+)",
+      "dest": "/backend/vercel/orders.js"
+    },
+    {
+      "src": "/api/orders",
+      "dest": "/backend/vercel/orders.js"
+    },
+    {
+      "src": "/api/products",
+      "dest": "/backend/vercel/products.js"
+    },
+    {
+      "src": "/api/teams",
+      "dest": "/backend/vercel/teams.js"
     },
     {
       "src": "/(.*)",

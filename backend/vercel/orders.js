@@ -86,10 +86,10 @@ export default async function handler(req, res) {
                 });
             }
 
-            setTimeout(() => res.json({
+            res.json({
                 success: true,
                 order
-            }), 3000);
+            });
 
         } else {
             return res.status(404).json({ error: 'Endpoint not found' });

@@ -97,10 +97,10 @@ router.get('/:orderId', async (req, res) => {
             });
         }
 
-        setTimeout(() => res.json({
+        res.json({
             success: true,
             order
-        }), 3000);
+        });
 
 
     } catch (err) {
