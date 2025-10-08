@@ -6,28 +6,15 @@
       "config": {
         "distDir": "dist"
       }
+    },
+    {
+      "src": "backend/vercel/**/*.js",
+      "use": "@vercel/node"
     }
   ],
-  "functions": {
-    "backend/vercel/*.js": {
-      "runtime": "@vercel/node"
-    }
-  },
   "routes": [
     {
-      "src": "/api/auth/(register|login)",
-      "dest": "/backend/vercel/auth.js"
-    },
-    {
-      "src": "/api/posts/(images|[^/]+)",
-      "dest": "/backend/vercel/posts.js"
-    },
-    {
-      "src": "/api/orders/([^/]+)",
-      "dest": "/backend/vercel/orders.js"
-    },
-    {
-      "src": "/api/(products|teams|posts|orders)",
+      "src": "/api/(.*)",
       "dest": "/backend/vercel/$1.js"
     },
     {
