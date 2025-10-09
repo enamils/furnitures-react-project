@@ -9,42 +9,61 @@
       }
     }
   ],
+  "functions": {
+    "backend/vercel/auth.js": {
+      "runtime": "@vercel/node"
+    },
+    "backend/vercel/products.js": {
+      "runtime": "@vercel/node"
+    },
+    "backend/vercel/teams.js": {
+      "runtime": "@vercel/node"
+    },
+    "backend/vercel/posts.js": {
+      "runtime": "@vercel/node"
+    },
+    "backend/vercel/orders.js": {
+      "runtime": "@vercel/node"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/auth/(register|login)",
+      "destination": "/backend/vercel/auth.js"
+    },
+    {
+      "source": "/api/products",
+      "destination": "/backend/vercel/products.js"
+    },
+    {
+      "source": "/api/teams",
+      "destination": "/backend/vercel/teams.js"
+    },
+    {
+      "source": "/api/posts/images",
+      "destination": "/backend/vercel/posts.js"
+    },
+    {
+      "source": "/api/posts/(.*)",
+      "destination": "/backend/vercel/posts.js"
+    },
+    {
+      "source": "/api/posts",
+      "destination": "/backend/vercel/posts.js"
+    },
+    {
+      "source": "/api/orders/(.*)",
+      "destination": "/backend/vercel/orders.js"
+    },
+    {
+      "source": "/api/orders",
+      "destination": "/backend/vercel/orders.js"
+    }
+  ],
   "routes": [
     {
-      "src": "/api/auth/(register|login)",
-      "dest": "backend/vercel/auth.js"
-    },
-    {
-      "src": "/api/products",
-      "dest": "backend/vercel/products.js"
-    },
-    {
-      "src": "/api/teams",
-      "dest": "backend/vercel/teams.js"
-    },
-    {
-      "src": "/api/posts/images",
-      "dest": "backend/vercel/posts.js"
-    },
-    {
-      "src": "/api/posts/([^/]+)",
-      "dest": "backend/vercel/posts.js"
-    },
-    {
-      "src": "/api/posts",
-      "dest": "backend/vercel/posts.js"
-    },
-    {
-      "src": "/api/orders/([^/]+)",
-      "dest": "backend/vercel/orders.js"
-    },
-    {
-      "src": "/api/orders",
-      "dest": "backend/vercel/orders.js"
-    },
-    {
       "src": "/(.*)",
-      "dest": "frontend/$1"
+      "dest": "/frontend/$1"
     }
   ]
 }
