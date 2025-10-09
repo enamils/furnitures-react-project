@@ -19,7 +19,7 @@ export const createOrder = async (orderData: Omit<CheckoutOrderType, 'orderDate'
 };
 
 export const getOrder = async (orderId: string): Promise<CheckoutResponseType> => {
-    const response = await fetch(`${API_URL}/orders/${orderId}`, {
+    const response = await fetch(`${API_URL}/api/orders/${orderId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

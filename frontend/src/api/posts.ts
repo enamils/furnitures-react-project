@@ -49,7 +49,7 @@ export const deletePost = async (id: string): Promise<PostType[]> => {
 }
 
 export const updatePost = async (postData: Partial<PostType> & { id: string }): Promise<PostType> => {
-    const response = await fetch(`${API_URL}/posts/${postData.id}`, {
+    const response = await fetch(`${API_URL}/api/posts/${postData.id}`, {
         method: "PATCH",
         body: JSON.stringify(postData),
         headers: {

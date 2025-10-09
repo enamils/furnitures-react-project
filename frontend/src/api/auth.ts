@@ -1,5 +1,7 @@
 import type { UserData } from "../types/userDataType.ts";
 
+const API_URL = import.meta.env.VITE_FURNITURES_URL;
+
 export const calculateExpirationDate = (expirationTime = 3600000) => {
     return new Date(new Date().getTime() + expirationTime);
 };
@@ -40,4 +42,34 @@ export const saveAuthData = (token: string, userId: string, expirationTime?: num
 export const removeAuthData = (): null => {
     localStorage.removeItem('userData');
     return null;
+};
+
+export const register = async (email: string, password: string) => {
+  const response = await fetch(`${API_URL}/api/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return response.json();
+};
+
+export const login = async (email: string, password: string) => {
+  const response = await fetch(`${API_URL}/api/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return response.json();
 };
