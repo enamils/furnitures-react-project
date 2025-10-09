@@ -9,7 +9,7 @@ interface Posts extends PostFormType {
 }
 
 export const createNewPost = async (postData: PostFormType): Promise<Posts> => {
-    const response = await fetch(`${API_URL}/posts`, {
+    const response = await fetch(`${API_URL}/api/posts`, {
         method: "POST",
         body: JSON.stringify(postData),
         headers: {
@@ -27,7 +27,7 @@ export const createNewPost = async (postData: PostFormType): Promise<Posts> => {
 }
 
 export const fetchPost = async (): Promise<PostType[]> => {
-    const response = await fetch(`${API_URL}/posts`);
+    const response = await fetch(`${API_URL}/api/posts`);
     if (!response.ok) {
         throw new Error('Failed to fetch posts');
     }
@@ -36,7 +36,7 @@ export const fetchPost = async (): Promise<PostType[]> => {
 }
 
 export const deletePost = async (id: string): Promise<PostType[]> => {
-    const response = await fetch(`${API_URL}/posts/${id}`, {
+    const response = await fetch(`${API_URL}/api/posts/${id}`, {
         method: "DELETE",
     });
 
@@ -49,7 +49,7 @@ export const deletePost = async (id: string): Promise<PostType[]> => {
 }
 
 export const updatePost = async (postData: Partial<PostType> & { id: string }): Promise<PostType> => {
-    const response = await fetch(`${API_URL}/posts/${postData.id}`, {
+    const response = await fetch(`${API_URL}/api/posts/${postData.id}`, {
         method: "PATCH",
         body: JSON.stringify(postData),
         headers: {

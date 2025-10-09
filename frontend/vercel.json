@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/posts/images",
+      "destination": "/api/posts/images"
+    },
+    {
+      "source": "/api/posts/(.*)",
+      "destination": "/api/posts/$1"
+    },
+    {
+      "source": "/api/orders/(.*)",
+      "destination": "/api/orders/$1"
+    },
+    {
+      "source": "/api/auth/(.*)",
+      "destination": "/api/auth/$1"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ]
+}
