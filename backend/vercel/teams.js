@@ -1,14 +1,37 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const currentDir = path.dirname(__filename);
-const baseDir = path.join(currentDir, '..', 'api');
+const teams = [
+    {
+        "id": 1,
+        "name": "Lawson Arnold",
+        "job": "CEO, Founder, Atty.",
+        "resume": "Separated they live in. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.",
+        "image": "images/person_1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Jeremy Walker",
+        "job": "CEO, Founder, Atty.",
+        "resume": "Separated they live in. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.",
+        "image": "images/person_2.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Patrik White",
+        "job": "CEO, Founder, Atty.",
+        "resume": "Separated they live in. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.",
+        "image": "images/person_3.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Kathryn Ryan",
+        "job": "CEO, Founder, Atty.",
+        "resume": "Separated they live in. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.",
+        "image": "images/person_4.jpg"
+    }
+];
 
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') {
@@ -19,18 +42,5 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    try {
-        const filePath = path.join(baseDir, 'teams.json');
-
-        if (!filePath.startsWith(baseDir)) {
-            return res.status(400).json({ error: 'Invalid file path' });
-        }
-
-        const data = await fs.promises.readFile(filePath, 'utf-8');
-        const teams = JSON.parse(data);
-        res.json(teams);
-    } catch (err) {
-        console.error('Error reading teams.json:', err.message);
-        res.status(500).json({ error: 'Failed to load teams profile' });
-    }
+    return res.json(teams);
 }

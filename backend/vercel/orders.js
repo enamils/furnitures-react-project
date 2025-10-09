@@ -1,10 +1,4 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const currentDir = path.dirname(__filename);
-const baseDir = path.join(currentDir, '..', 'api');
+import { kv } from '@vercel/kv';
 
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -42,20 +36,12 @@ export default async function handler(req, res) {
                 status: 'pending'
             };
 
-            const ordersFilePath = path.join(baseDir, 'orders.json');
-            let orders = [];
-
-            try {
-                if (fs.existsSync(ordersFilePath)) {
-                    const data = await fs.promises.readFile(ordersFilePath, 'utf-8');
-                    orders = JSON.parse(data);
-                }
-            } catch (err) {
-                console.log('Creating new orders file');
-            }
-
+            // Récupérer les commandes depuis Vercel KV
+            const orders = await kv.get('orders') || [];
             orders.push(order);
-            await fs.promises.writeFile(ordersFilePath, JSON.stringify(orders, null, 2));
+
+            // Sauvegarder les commandes dans Vercel KV
+            await kv.set('orders', orders);
 
             return res.status(201).json({
                 success: true,
@@ -66,17 +52,7 @@ export default async function handler(req, res) {
 
         } else if (req.method === 'GET' && orderId && orderId !== 'orders') {
             // Récupérer une commande par ID
-            const ordersFilePath = path.join(baseDir, 'orders.json');
-
-            if (!fs.existsSync(ordersFilePath)) {
-                return res.status(404).json({
-                    success: false,
-                    error: 'Order not found'
-                });
-            }
-
-            const data = await fs.promises.readFile(ordersFilePath, 'utf-8');
-            const orders = JSON.parse(data);
+            const orders = await kv.get('orders') || [];
             const order = orders.find(o => o.id === orderId);
 
             if (!order) {
@@ -86,9 +62,17 @@ export default async function handler(req, res) {
                 });
             }
 
-            res.json({
+            return res.json({
                 success: true,
                 order
+            });
+
+        } else if (req.method === 'GET') {
+            // Récupérer toutes les commandes
+            const orders = await kv.get('orders') || [];
+            return res.json({
+                success: true,
+                orders
             });
 
         } else {

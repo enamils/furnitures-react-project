@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import { kv } from '@vercel/kv';
 
-// TODO : En production, utilisez une base de données
-let users = [];
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 const TOKEN_EXPIRY = '1h';
 
@@ -28,14 +27,20 @@ export default async function handler(req, res) {
                     return res.status(400).json({ message: 'Invalid email or password' });
                 }
 
+                // Récupérer les utilisateurs depuis Vercel KV
+                const users = await kv.get('users') || [];
                 const existingUser = users.find(user => user.email === email);
+
                 if (existingUser) {
                     return res.status(400).json({ message: 'Email exists already' });
                 }
 
                 const hashedPassword = await bcrypt.hash(password, 10);
                 const newUser = { id: Date.now().toString(), email, password: hashedPassword };
+
+                // Ajouter le nouvel utilisateur et sauvegarder
                 users.push(newUser);
+                await kv.set('users', users);
 
                 const token = jwt.sign({ id: newUser.id, email }, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
                 const expirationTime = 3600 * 1000;
@@ -52,7 +57,10 @@ export default async function handler(req, res) {
                     return res.status(400).json({ message: 'Please provide an email and password' });
                 }
 
+                // Récupérer les utilisateurs depuis Vercel KV
+                const users = await kv.get('users') || [];
                 const user = users.find(user => user.email === email);
+
                 if (!user) {
                     return res.status(401).json({ message: 'Invalid user' });
                 }
@@ -76,6 +84,7 @@ export default async function handler(req, res) {
         return res.status(404).json({ message: 'Endpoint not found' });
 
     } catch (error) {
+        console.error('Auth error:', error.message);
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 }
