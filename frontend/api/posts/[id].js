@@ -1,4 +1,9 @@
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 // Initial posts data - même que dans posts/index.js
 const initialPosts = [
@@ -62,8 +67,8 @@ export default async function handler(req, res) {
 
   if (req.method === 'DELETE') {
     try {
-      // Récupérer les posts depuis Vercel KV
-      let posts = await kv.get('posts') || initialPosts;
+      // Récupérer les posts depuis Upstash Redis
+      let posts = await redis.get('posts') || initialPosts;
 
       const postIndex = posts.findIndex((post) => post.id === id);
 
@@ -73,8 +78,8 @@ export default async function handler(req, res) {
 
       posts = posts.filter((post) => post.id !== id);
 
-      // Sauvegarder dans Vercel KV
-      await kv.set('posts', posts);
+      // Sauvegarder dans Upstash Redis
+      await redis.set('posts', posts);
 
       console.log('Post deleted:', id);
       res.status(200).json({ message: 'Post deleted successfully.' });
@@ -92,8 +97,8 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'The author, title and image fields are required.' });
       }
 
-      // Récupérer les posts depuis Vercel KV
-      let posts = await kv.get('posts') || initialPosts;
+      // Récupérer les posts depuis Upstash Redis
+      let posts = await redis.get('posts') || initialPosts;
 
       const postIndex = posts.findIndex((post) => post.id === id);
       if (postIndex === -1) {
@@ -102,8 +107,8 @@ export default async function handler(req, res) {
 
       posts[postIndex] = { ...posts[postIndex], author, title, image };
 
-      // Sauvegarder dans Vercel KV
-      await kv.set('posts', posts);
+      // Sauvegarder dans Upstash Redis
+      await redis.set('posts', posts);
 
       console.log('Post updated:', id);
       res.status(200).json(posts[postIndex]);

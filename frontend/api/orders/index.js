@@ -1,4 +1,9 @@
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 // Initial orders data for first time setup
 const initialOrders = [
@@ -77,12 +82,12 @@ export default async function handler(req, res) {
       };
 
       // Récupérer les commandes existantes
-      let orders = await kv.get('orders') || [];
+      let orders = await redis.get('orders') || [];
 
       orders.push(order);
 
-      // Sauvegarder dans Vercel KV
-      await kv.set('orders', orders);
+      // Sauvegarder dans Upstash Redis
+      await redis.set('orders', orders);
 
       console.log('New order created:', orderId);
 

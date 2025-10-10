@@ -1,6 +1,11 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 const TOKEN_EXPIRY = '1h';
@@ -26,7 +31,7 @@ export default async function handler(req, res) {
       }
 
       // Vérifier si l'utilisateur existe déjà
-      const existingUser = await kv.hget('users', email);
+      const existingUser = await redis.hget('users', email);
       if (existingUser) {
         return res.status(400).json({ message: 'Email exists already' });
       }
@@ -38,8 +43,8 @@ export default async function handler(req, res) {
         password: hashedPassword
       };
 
-      // Stocker l'utilisateur dans Vercel KV
-      await kv.hset('users', email, JSON.stringify(newUser));
+      // Stocker l'utilisateur dans Upstash Redis
+      await redis.hset('users', email, JSON.stringify(newUser));
 
       const token = jwt.sign({ id: newUser.id, email }, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
       const expirationTime = 3600 * 1000;

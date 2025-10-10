@@ -1,6 +1,11 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 const TOKEN_EXPIRY = '1h';
@@ -25,8 +30,8 @@ export default async function handler(req, res) {
         return res.status(400).json({ message: 'Please provide an email and password' });
       }
 
-      // Récupérer l'utilisateur depuis Vercel KV
-      const userData = await kv.hget('users', email);
+      // Récupérer l'utilisateur depuis Upstash Redis
+      const userData = await redis.hget('users', email);
 
       if (!userData) {
         return res.status(401).json({ message: 'Invalid user' });

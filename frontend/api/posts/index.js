@@ -1,4 +1,9 @@
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 // Initial posts data for first time setup
 const initialPosts = [
@@ -60,12 +65,12 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
-      let posts = await kv.get('posts');
+      let posts = await redis.get('posts');
 
       // Si aucun post n'existe, initialiser avec les données par défaut
       if (!posts) {
         posts = initialPosts;
-        await kv.set('posts', posts);
+        await redis.set('posts', posts);
       }
 
       console.log('Posts loaded successfully, count:', posts.length);
@@ -85,7 +90,7 @@ export default async function handler(req, res) {
       }
 
       // Récupérer les posts existants
-      let posts = await kv.get('posts') || [];
+      let posts = await redis.get('posts') || [];
 
       const newPost = {
         id: Date.now().toString(),
@@ -97,8 +102,8 @@ export default async function handler(req, res) {
 
       posts.push(newPost);
 
-      // Sauvegarder dans Vercel KV
-      await kv.set('posts', posts);
+      // Sauvegarder dans Upstash Redis
+      await redis.set('posts', posts);
 
       console.log('New post created:', newPost.id);
       res.status(201).json(newPost);

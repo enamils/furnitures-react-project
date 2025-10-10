@@ -1,4 +1,9 @@
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 // Initial orders data - même que dans orders/index.js
 const initialOrders = [
@@ -57,8 +62,8 @@ export default async function handler(req, res) {
     try {
       const { orderId } = req.query;
 
-      // Récupérer les commandes depuis Vercel KV
-      let orders = await kv.get('orders') || initialOrders;
+      // Récupérer les commandes depuis Upstash Redis
+      let orders = await redis.get('orders') || initialOrders;
 
       const order = orders.find((o) => o.id === orderId);
 
