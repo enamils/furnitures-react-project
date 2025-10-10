@@ -1,5 +1,7 @@
-// Shared orders data - same as in orders/index.js
-let orders = [
+import { kv } from '@vercel/kv';
+
+// Initial orders data - même que dans orders/index.js
+const initialOrders = [
   {
     "id": "ORDER-1759419023310-t2cg80d76",
     "billingDetails": {
@@ -39,7 +41,7 @@ let orders = [
   }
 ];
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   // Headers CORS complets
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
@@ -54,6 +56,9 @@ export default function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const { orderId } = req.query;
+
+      // Récupérer les commandes depuis Vercel KV
+      let orders = await kv.get('orders') || initialOrders;
 
       const order = orders.find((o) => o.id === orderId);
 

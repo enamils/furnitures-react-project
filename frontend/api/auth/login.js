@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import fs from 'fs';
-import path from 'path';
+import { kv } from '@vercel/kv';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 const TOKEN_EXPIRY = '1h';
@@ -26,19 +25,14 @@ export default async function handler(req, res) {
         return res.status(400).json({ message: 'Please provide an email and password' });
       }
 
-      const usersPath = path.join(process.cwd(), 'data', 'users.json');
+      // Récupérer l'utilisateur depuis Vercel KV
+      const userData = await kv.hget('users', email);
 
-      if (!fs.existsSync(usersPath)) {
+      if (!userData) {
         return res.status(401).json({ message: 'Invalid user' });
       }
 
-      const data = fs.readFileSync(usersPath, 'utf-8');
-      const users = JSON.parse(data);
-
-      const user = users.find((user) => user.email === email);
-      if (!user) {
-        return res.status(401).json({ message: 'Invalid user' });
-      }
+      const user = JSON.parse(userData);
 
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
@@ -54,6 +48,7 @@ export default async function handler(req, res) {
         expirationTime
       });
     } catch (error) {
+      console.error('Login error:', error);
       res.status(500).json({ message: 'Not authenticated' });
     }
   } else {

@@ -1,5 +1,7 @@
-// Initial orders data - will be managed in memory for Vercel
-let orders = [
+import { kv } from '@vercel/kv';
+
+// Initial orders data for first time setup
+const initialOrders = [
   {
     "id": "ORDER-1759419023310-t2cg80d76",
     "billingDetails": {
@@ -39,7 +41,7 @@ let orders = [
   }
 ];
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   // Headers CORS complets
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
@@ -74,7 +76,14 @@ export default function handler(req, res) {
         status: 'pending'
       };
 
+      // Récupérer les commandes existantes
+      let orders = await kv.get('orders') || [];
+
       orders.push(order);
+
+      // Sauvegarder dans Vercel KV
+      await kv.set('orders', orders);
+
       console.log('New order created:', orderId);
 
       res.status(201).json({

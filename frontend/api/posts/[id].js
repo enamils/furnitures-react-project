@@ -1,5 +1,7 @@
-// Shared posts data - same as in posts/index.js
-let posts = [
+import { kv } from '@vercel/kv';
+
+// Initial posts data - même que dans posts/index.js
+const initialPosts = [
   {
     "id": "1751220252735",
     "author": "Aicha",
@@ -44,7 +46,7 @@ let posts = [
   }
 ];
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   // Headers CORS complets
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
@@ -60,6 +62,9 @@ export default function handler(req, res) {
 
   if (req.method === 'DELETE') {
     try {
+      // Récupérer les posts depuis Vercel KV
+      let posts = await kv.get('posts') || initialPosts;
+
       const postIndex = posts.findIndex((post) => post.id === id);
 
       if (postIndex === -1) {
@@ -67,6 +72,10 @@ export default function handler(req, res) {
       }
 
       posts = posts.filter((post) => post.id !== id);
+
+      // Sauvegarder dans Vercel KV
+      await kv.set('posts', posts);
+
       console.log('Post deleted:', id);
       res.status(200).json({ message: 'Post deleted successfully.' });
     } catch (error) {
@@ -83,12 +92,19 @@ export default function handler(req, res) {
         return res.status(400).json({ error: 'The author, title and image fields are required.' });
       }
 
+      // Récupérer les posts depuis Vercel KV
+      let posts = await kv.get('posts') || initialPosts;
+
       const postIndex = posts.findIndex((post) => post.id === id);
       if (postIndex === -1) {
         return res.status(404).json({ error: 'Post not found' });
       }
 
       posts[postIndex] = { ...posts[postIndex], author, title, image };
+
+      // Sauvegarder dans Vercel KV
+      await kv.set('posts', posts);
+
       console.log('Post updated:', id);
       res.status(200).json(posts[postIndex]);
     } catch (error) {

@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import fs from 'fs';
-import path from 'path';
+import { kv } from '@vercel/kv';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 const TOKEN_EXPIRY = '1h';
@@ -26,24 +25,21 @@ export default async function handler(req, res) {
         return res.status(400).json({ message: 'Invalid email or password' });
       }
 
-      const usersPath = path.join(process.cwd(), 'data', 'users.json');
-      let users = [];
-
-      if (fs.existsSync(usersPath)) {
-        const data = fs.readFileSync(usersPath, 'utf-8');
-        users = JSON.parse(data);
-      }
-
-      const existingUser = users.find((user) => user.email === email);
+      // Vérifier si l'utilisateur existe déjà
+      const existingUser = await kv.hget('users', email);
       if (existingUser) {
         return res.status(400).json({ message: 'Email exists already' });
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
-      const newUser = { id: Date.now().toString(), email, password: hashedPassword };
-      users.push(newUser);
+      const newUser = {
+        id: Date.now().toString(),
+        email,
+        password: hashedPassword
+      };
 
-      fs.writeFileSync(usersPath, JSON.stringify(users, null, 2));
+      // Stocker l'utilisateur dans Vercel KV
+      await kv.hset('users', email, JSON.stringify(newUser));
 
       const token = jwt.sign({ id: newUser.id, email }, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
       const expirationTime = 3600 * 1000;
@@ -54,6 +50,7 @@ export default async function handler(req, res) {
         expirationTime
       });
     } catch (error) {
+      console.error('Registration error:', error);
       res.status(500).json({ message: 'Error during registration' });
     }
   } else {

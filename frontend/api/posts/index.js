@@ -1,5 +1,7 @@
-// Initial posts data - will be managed in memory for Vercel
-let posts = [
+import { kv } from '@vercel/kv';
+
+// Initial posts data for first time setup
+const initialPosts = [
   {
     "id": "1751220252735",
     "author": "Aicha",
@@ -44,7 +46,7 @@ let posts = [
   }
 ];
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   // Headers CORS complets
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
@@ -58,6 +60,14 @@ export default function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
+      let posts = await kv.get('posts');
+
+      // Si aucun post n'existe, initialiser avec les données par défaut
+      if (!posts) {
+        posts = initialPosts;
+        await kv.set('posts', posts);
+      }
+
       console.log('Posts loaded successfully, count:', posts.length);
       res.json(posts);
     } catch (error) {
@@ -74,6 +84,9 @@ export default function handler(req, res) {
         return res.status(400).json({ error: 'The author, title and image are required.' });
       }
 
+      // Récupérer les posts existants
+      let posts = await kv.get('posts') || [];
+
       const newPost = {
         id: Date.now().toString(),
         author,
@@ -83,6 +96,10 @@ export default function handler(req, res) {
       };
 
       posts.push(newPost);
+
+      // Sauvegarder dans Vercel KV
+      await kv.set('posts', posts);
+
       console.log('New post created:', newPost.id);
       res.status(201).json(newPost);
     } catch (error) {
