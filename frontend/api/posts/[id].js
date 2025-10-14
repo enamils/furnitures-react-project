@@ -5,7 +5,6 @@ const redis = new Redis({
   token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
-// Initial posts data - même que dans posts/index.js
 const initialPosts = [
   {
     "id": "1751220252735",
@@ -52,12 +51,10 @@ const initialPosts = [
 ];
 
 export default async function handler(req, res) {
-  // Headers CORS complets
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  // Gérer les requêtes preflight OPTIONS
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
@@ -67,7 +64,6 @@ export default async function handler(req, res) {
 
   if (req.method === 'DELETE') {
     try {
-      // Récupérer les posts depuis Upstash Redis
       let posts = await redis.get('posts') || initialPosts;
 
       const postIndex = posts.findIndex((post) => post.id === id);
@@ -78,7 +74,6 @@ export default async function handler(req, res) {
 
       posts = posts.filter((post) => post.id !== id);
 
-      // Sauvegarder dans Upstash Redis
       await redis.set('posts', posts);
 
       console.log('Post deleted:', id);
@@ -97,7 +92,6 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'The author, title and image fields are required.' });
       }
 
-      // Récupérer les posts depuis Upstash Redis
       let posts = await redis.get('posts') || initialPosts;
 
       const postIndex = posts.findIndex((post) => post.id === id);
@@ -107,7 +101,6 @@ export default async function handler(req, res) {
 
       posts[postIndex] = { ...posts[postIndex], author, title, image };
 
-      // Sauvegarder dans Upstash Redis
       await redis.set('posts', posts);
 
       console.log('Post updated:', id);

@@ -11,12 +11,10 @@ const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 const TOKEN_EXPIRY = '1h';
 
 export default async function handler(req, res) {
-  // Headers CORS complets
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  // Gérer les requêtes preflight OPTIONS
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
@@ -30,7 +28,6 @@ export default async function handler(req, res) {
         return res.status(400).json({ message: 'Please provide an email and password' });
       }
 
-      // Récupérer l'utilisateur depuis Upstash Redis
       const userData = await redis.hget('users', email);
 
       if (!userData) {

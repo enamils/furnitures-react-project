@@ -15,12 +15,10 @@ const images = [
 ];
 
 export default function handler(req, res) {
-  // Headers CORS complets
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  // Gérer les requêtes preflight OPTIONS
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;

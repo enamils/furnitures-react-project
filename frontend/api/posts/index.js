@@ -5,7 +5,6 @@ const redis = new Redis({
   token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
-// Initial posts data for first time setup
 const initialPosts = [
   {
     "id": "1751220252735",
@@ -52,12 +51,10 @@ const initialPosts = [
 ];
 
 export default async function handler(req, res) {
-  // Headers CORS complets
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  // Gérer les requêtes preflight OPTIONS
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
@@ -67,7 +64,6 @@ export default async function handler(req, res) {
     try {
       let posts = await redis.get('posts');
 
-      // Si aucun post n'existe, initialiser avec les données par défaut
       if (!posts) {
         posts = initialPosts;
         await redis.set('posts', posts);
@@ -89,7 +85,6 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'The author, title and image are required.' });
       }
 
-      // Récupérer les posts existants
       let posts = await redis.get('posts') || [];
 
       const newPost = {
@@ -102,7 +97,6 @@ export default async function handler(req, res) {
 
       posts.push(newPost);
 
-      // Sauvegarder dans Upstash Redis
       await redis.set('posts', posts);
 
       console.log('New post created:', newPost.id);

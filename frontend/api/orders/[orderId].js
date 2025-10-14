@@ -5,7 +5,6 @@ const redis = new Redis({
   token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
-// Initial orders data - même que dans orders/index.js
 const initialOrders = [
   {
     "id": "ORDER-1759419023310-t2cg80d76",
@@ -47,12 +46,10 @@ const initialOrders = [
 ];
 
 export default async function handler(req, res) {
-  // Headers CORS complets
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  // Gérer les requêtes preflight OPTIONS
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
@@ -62,7 +59,6 @@ export default async function handler(req, res) {
     try {
       const { orderId } = req.query;
 
-      // Récupérer les commandes depuis Upstash Redis
       let orders = await redis.get('orders') || initialOrders;
 
       const order = orders.find((o) => o.id === orderId);

@@ -5,47 +5,6 @@ const redis = new Redis({
   token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
-// Initial orders data for first time setup
-const initialOrders = [
-  {
-    "id": "ORDER-1759419023310-t2cg80d76",
-    "billingDetails": {
-      "country": "fr",
-      "firstName": "aaa",
-      "lastName": "zzzz",
-      "address": "5 rue ernest roche",
-      "apartment": "rue ernest roche",
-      "state": "France",
-      "postalCode": "75017",
-      "email": "test@mail.fr",
-      "phone": "0101010101",
-      "createAccount": false,
-      "differentAddress": false,
-      "orderNotes": "dsfsdv"
-    },
-    "cartItems": [
-      {
-        "id": 2,
-        "name": "Sweeden Chair",
-        "price": 69.99,
-        "image": "images/product-2.png",
-        "quantity": 1
-      },
-      {
-        "id": 3,
-        "name": "Kruzo Aero Chair",
-        "price": 78.99,
-        "image": "images/product-3.png",
-        "quantity": 1
-      }
-    ],
-    "subtotal": 296.98,
-    "total": 296.98,
-    "orderDate": "2025-10-02T15:30:23.310Z",
-    "status": "pending"
-  }
-];
-
 export default async function handler(req, res) {
   // Headers CORS complets
   res.setHeader('Access-Control-Allow-Origin', '*');
