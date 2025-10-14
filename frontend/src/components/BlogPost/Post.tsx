@@ -11,7 +11,7 @@ type PostProps = {
     showActions?: boolean;
 }
 
-const API_URL = import.meta.env.VITE_FURNITURES_URL || '';
+const API_URL = import.meta.env.VITE_FURNITURES_URL || 'http://localhost:5000';
 
 const Post: React.FC<PostProps> = ({posts,onDelete,showActions = true}) => {
     const { isLoggedIn } = useAuthentication();

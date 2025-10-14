@@ -8,7 +8,7 @@ type ProductItemProps = {
     product: CartProductType;
 };
 
-const API_URL = import.meta.env.VITE_FURNITURES_URL || '';
+const API_URL = import.meta.env.VITE_FURNITURES_URL || 'http://localhost:5000';
 
 const CartItem: React.FC<ProductItemProps> = ({product}) => {
     const {addToCart, removeFromCart, clearCartItem} = useCart();

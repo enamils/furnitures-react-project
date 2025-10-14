@@ -1,7 +1,7 @@
 import React from "react";
 import type {TeamProfile} from "../../types/teamsProfileType.ts";
 
-const API_URL = import.meta.env.VITE_FURNITURES_URL || '';
+const API_URL = import.meta.env.VITE_FURNITURES_URL || 'http://localhost:5000';
 
 type TeamItemProps = {
     teams: TeamProfile

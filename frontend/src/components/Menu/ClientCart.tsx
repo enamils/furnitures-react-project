@@ -12,7 +12,7 @@ import cartImg from "../../assets/images/cart.svg";
 const ClientCart: React.FC = () => {
     const [isModalLogout, setIsModalLogout] = useState<boolean>(false);
     const { cart } = useCart();
-    const { isLoggedIn, logout } : { isLoggedIn: boolean, logout: () => void } = useAuthentication();
+    const { isLoggedIn, logout } = useAuthentication();
     const navigate = useNavigate();
 
     const totalCartItems: number = cart.reduce((total: number, product: CartProductType) => total + product.quantity, 0);
