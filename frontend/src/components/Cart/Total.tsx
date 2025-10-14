@@ -4,7 +4,7 @@ import {currencyFormatter} from "../../utils/formatting.ts";
 
 const Total: React.FC<{priceTotal: number}>= ({priceTotal}) => {
     return (
-        <div className="text-[color:var(--black)]">
+        <div className="text-[color:var(--black)] w-full md:w-lg">
             <p className="uppercase mb-10 border-b border-gray-200 text-2xl">Cart totals</p>
             <div className="flex justify-between mb-3">
                 <p>Subtotal</p>

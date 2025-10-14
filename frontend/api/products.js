@@ -1,4 +1,3 @@
-// Products data included directly
 const products = [
   {
     "id": 1,

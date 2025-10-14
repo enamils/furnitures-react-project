@@ -52,7 +52,7 @@ export const useUpdatePost = () => {
 }
 
 export const useLatestPosts = (limit: number = 3) => {
-    return useQuery<PostType[]>({
+    return useQuery<PostType[], Error>({
         queryKey: ['posts', 'latest', limit],
         queryFn: async () => {
             const posts = await fetchPost();

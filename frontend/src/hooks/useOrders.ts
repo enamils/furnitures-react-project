@@ -15,7 +15,7 @@ export const useCreateOrder = () => {
 };
 
 export const useGetOrder = (orderId: string | null) => {
-    return useQuery({
+    return useQuery<CheckoutResponseType, Error>({
         queryKey: ['order', orderId],
         queryFn: () => getOrder(orderId!),
         enabled: !!orderId,

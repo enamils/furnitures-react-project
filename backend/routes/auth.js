@@ -6,7 +6,7 @@ const router = express.Router();
 
 // TODO : In production, use a database instead
 let users = [];
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
+const JWT_SECRET = process.env.JWT_SECRET;
 const TOKEN_EXPIRY = '1h';
 
 // Registration
