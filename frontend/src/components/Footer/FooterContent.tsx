@@ -16,16 +16,16 @@ const FooterContent: React.FC = () => {
                 </p>
                 <ul className="flex gap-2">
                     <li>
-                        <SpotLightedIcon icon={faFacebookF}/>
+                        <SpotLightedIcon icon={faFacebookF} label="Facebook"/>
                     </li>
                     <li>
-                        <SpotLightedIcon icon={faXTwitter}/>
+                        <SpotLightedIcon icon={faXTwitter} label="X"/>
                     </li>
                     <li>
-                        <SpotLightedIcon icon={faInstagram}/>
+                        <SpotLightedIcon icon={faInstagram} label="Instagram"/>
                     </li>
                     <li>
-                        <SpotLightedIcon icon={faLinkedinIn}/>
+                        <SpotLightedIcon icon={faLinkedinIn} label="Linkedin"/>
                     </li>
                 </ul>
             </div>

@@ -70,13 +70,16 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
                         <button
                             key={index}
                             onClick={() => goToSlide(index)}
-                            className={`w-2 h-2 rounded-full transition-colors cursor-pointer ${
-                                index === currentSlide
-                                    ? 'bg-[color:var(--primary)]'
-                                    : 'bg-[color:var(--gray-lighter)] hover:bg-[color:var(--primary)]'
-                            }`}
-                            aria-label={`Go to slide ${index + 1}`}
-                        />
+                            className="w-11 h-11 rounded-full transition-colors cursor-pointer flex items-center justify-center"
+                            aria-label={`Go to slide ${index + 1}`}>
+                            <span
+                                className={`w-2 h-2 rounded-full ${
+                                    index === currentSlide
+                                        ? 'bg-[color:var(--primary)]'
+                                        : 'bg-[color:var(--gray-lighter)] hover:bg-[color:var(--primary)]'
+                                }`}
+                            />
+                        </button>
                     ))}
                 </div>
             </div>
