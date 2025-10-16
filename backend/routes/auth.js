@@ -1,6 +1,8 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import dotenv from 'dotenv';
+dotenv.config({ path: '../backend/.env.backend' });
 
 const router = express.Router();
 
