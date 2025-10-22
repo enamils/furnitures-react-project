@@ -57,6 +57,7 @@ const ClientCart: React.FC = () => {
                 <NavLink to="/cart" className="pl-2 pr-2 flex gap-2">
                     <img src={cartImg} alt="cart" loading="lazy"/>
                     <span className="text-white">({totalCartItems})</span>
+                    <span className="sr-only sm:not-sr-only">Cart</span>
                 </NavLink>
             </li>
         </ul>
