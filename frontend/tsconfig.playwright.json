@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2015",
+    "lib": ["ES2015", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "types": ["node", "@playwright/test"],
+    "skipLibCheck": true
+  },
+  "include": ["playwright.config.ts", "e2e/**/*.ts"]
+}
+
