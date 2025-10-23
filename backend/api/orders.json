@@ -93,5 +93,61 @@
     "total": 480.9,
     "orderDate": "2025-10-04T16:30:18.253Z",
     "status": "pending"
+  },
+  {
+    "id": "ORDER-1761236887350-lzqcia1vw",
+    "billingDetails": {
+      "country": "FRANCE",
+      "firstName": "Jean",
+      "lastName": "Dupont",
+      "address": "123 Rue de la Paix",
+      "state": "Île-de-France",
+      "postalCode": "75001",
+      "email": "buyer1761236872278@example.com",
+      "phone": "0612345678",
+      "createAccount": false,
+      "differentAddress": false
+    },
+    "cartItems": [
+      {
+        "id": 1,
+        "name": "Nordic Chair",
+        "price": 49.99,
+        "image": "images/product-1.png",
+        "quantity": 2
+      }
+    ],
+    "subtotal": 99.98,
+    "total": 99.98,
+    "orderDate": "2025-10-23T16:28:07.350Z",
+    "status": "pending"
+  },
+  {
+    "id": "ORDER-1761236933036-xs7gfn80q",
+    "billingDetails": {
+      "country": "FRANCE",
+      "firstName": "Jean",
+      "lastName": "Dupont",
+      "address": "123 Rue de la Paix",
+      "state": "Île-de-France",
+      "postalCode": "75001",
+      "email": "buyer1761236916519@example.com",
+      "phone": "0612345678",
+      "createAccount": false,
+      "differentAddress": false
+    },
+    "cartItems": [
+      {
+        "id": 1,
+        "name": "Nordic Chair",
+        "price": 49.99,
+        "image": "images/product-1.png",
+        "quantity": 2
+      }
+    ],
+    "subtotal": 99.98,
+    "total": 99.98,
+    "orderDate": "2025-10-23T16:28:53.036Z",
+    "status": "pending"
   }
 ]
