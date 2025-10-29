@@ -16,6 +16,7 @@ const EditButton: React.FC<EditButtonProps> = ({ postId }) => {
             title="Update"
         >
             <FontAwesomeIcon icon={faPencil} />
+            <span className="sr-only sm:not-sr-only">Edit post</span>
         </NavLink>
     );
 };

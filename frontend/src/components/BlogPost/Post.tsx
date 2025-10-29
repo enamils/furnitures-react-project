@@ -28,6 +28,7 @@ const Post: React.FC<PostProps> = ({posts,onDelete,showActions = true}) => {
                         aria-label="delete post"
                     >
                         &times;
+                        <span className="sr-only sm:not-sr-only">Delete post</span>
                     </button>
                 </>
             )}
