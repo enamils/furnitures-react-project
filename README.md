@@ -1,6 +1,6 @@
 # 🛋️ FURNITURES REACT PROJECT
 
-A modern e-commerce furniture website with blog management system, built with React, TypeScript, and Node.js.
+A modern e-commerce furniture website with blog management system, built with React, TypeScript, and Supabase.
 
 > **Based on**: [ThemeWagon Furni Template](https://themewagon.github.io/furni/index.html)  
 > **Enhanced with**: Full-stack features including authentication, cart management, blog CMS, and order processing.
@@ -9,8 +9,8 @@ A modern e-commerce furniture website with blog management system, built with Re
 
 ```
 furnitures-react-project/
-├── backend/          # REST API - Node.js + Express
-└── frontend/         # SPA - React + TypeScript + Vite
+├── frontend/         # SPA - React + TypeScript + Vite
+└── scripts/          # Migration & setup scripts (archived)
 ```
 
 ## 🚀 Technologies
@@ -24,11 +24,11 @@ furnitures-react-project/
 - **React Hot Toast** - Notifications
 - **Context API** - State management (Auth & Cart)
 
-### Backend
-- **Node.js** + **Express** - REST API
-- **JSON files** - Data storage
-- **JWT** - Authentication
-- **bcryptjs** - Password hashing
+### Backend (Supabase)
+- **PostgreSQL** - Database
+- **Supabase Auth** - Authentication
+- **Supabase Storage** - Image hosting
+- **Row Level Security** - Data protection
 
 ### Testing
 - **Vitest** - Unit & Component tests
@@ -76,15 +76,27 @@ furnitures-react-project/
 ### Prerequisites
 - Node.js (v16 or higher)
 - npm or yarn
+- Supabase account (free tier available at [supabase.com](https://supabase.com))
 
-### Backend Setup
+### Supabase Setup
 
+1. **Create a Supabase project** at [https://supabase.com/dashboard](https://supabase.com/dashboard)
+
+2. **Run the SQL schema** from [MIGRATION_SUPABASE.md](MIGRATION_SUPABASE.md) in your Supabase SQL Editor to create tables
+
+3. **Configure environment variables**:
 ```bash
-cd backend
-npm install
-npm start
+cd frontend
+cp .env.example .env.local
 ```
-✅ Backend runs on `http://localhost:5000`
+
+Edit `.env.local` with your Supabase credentials:
+```env
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-public-key
+```
+
+Get these from: **Supabase Dashboard** → **Settings** → **API**
 
 ### Frontend Setup
 
@@ -94,8 +106,6 @@ npm install
 npm run dev
 ```
 ✅ Frontend runs on `http://localhost:5173`
-
-**⚠️ Important**: Both servers must be running simultaneously.
 
 ## 🧪 Testing
 
@@ -172,27 +182,26 @@ npm run test:e2e:report
 6. **Fill Form**: Enter shipping & billing information
 7. **Place Order**: Submit order and receive confirmation
 
-## 📂 API Endpoints
+## 📂 Database Structure
+
+### Tables
+- **products** - Product catalog
+- **teams** - Team members
+- **posts** - Blog posts (with user_id for author tracking)
+- **orders** - Customer orders
+- **images** - Selectable images for blog posts
+
+### Storage Buckets
+- **products** - Product images
+- **teams** - Team member photos
+- **posts** - Blog post images
 
 ### Authentication
-- `POST /api/auth/register` - Create new user
-- `POST /api/auth/login` - User login
+- Managed by Supabase Auth
+- Row Level Security (RLS) policies applied
+- Users can only modify their own posts
 
-### Products
-- `GET /api/products` - Get all products
-
-### Posts
-- `GET /api/posts` - Get all posts
-- `POST /api/posts` - Create new post (Auth required)
-- `PATCH /api/posts/:id` - Update post (Auth required)
-- `DELETE /api/posts/:id` - Delete post (Auth required)
-
-### Orders
-- `POST /api/orders` - Create order
-- `GET /api/orders/:id` - Get order by ID
-
-### Teams
-- `GET /api/teams` - Get team members
+For detailed schema, see [MIGRATION_SUPABASE.md](MIGRATION_SUPABASE.md)
 
 ## 🔧 Development Commands
 
@@ -204,18 +213,14 @@ npm run preview      # Preview production build
 npm run lint         # Run ESLint
 ```
 
-### Backend
-```bash
-npm start            # Start server on port 5000
-```
-
 ## 📝 Notes
 
 - All blog post operations (create, edit, delete) require authentication
 - Cart data persists in localStorage
-- JWT tokens expire after 1 hour
+- Authentication managed by Supabase Auth
 - E2E tests run on 3 browsers: Chromium, Firefox, and WebKit
-- Backend uses JSON files for data storage (no database required)
+- Images hosted on Supabase Storage
+- PostgreSQL database with Row Level Security
 
 
 ## 📄 License

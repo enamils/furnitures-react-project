@@ -2,8 +2,6 @@ import * as React from "react";
 import type {ImagePickerType} from "../../types/imagePickerType.ts";
 import classes from "./ImagePicker.module.css";
 
-const API_URL = import.meta.env.VITE_FURNITURES_URL || 'http://localhost:5000';
-
 const ImagePicker: React.FC<ImagePickerType> = ({images, selectedImage, onSelect}) => {
     return (
         <div className={`${classes.imagePicker} `}>
@@ -16,7 +14,7 @@ const ImagePicker: React.FC<ImagePickerType> = ({images, selectedImage, onSelect
                             className={`${selectedImage === path ? `${classes.selected}` : undefined}`}
                             onClick={() => onSelect(path)}>
                             <img
-                                src={new URL(path, API_URL).toString()}
+                                src={path}
                                 alt={caption}
                                 loading="lazy"
                                 width="835"
