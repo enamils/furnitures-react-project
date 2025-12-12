@@ -14,6 +14,7 @@ playwright-report
 test-results
 *.local
 .env*.production
+CLAUDE.md
 
 # Editor directories and files
 .vscode/*
@@ -26,3 +27,5 @@ test-results
 *.sln
 *.sw?
 .vercel
+.github/*.md
+.claude
