@@ -65,22 +65,37 @@ test.describe('Complete User Authentication Scenario', () => {
     await page.click('button[type="submit"]:has-text("Register")');
 
     // Wait for the response
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
 
     console.log('\nStep 4: Verify user is logged in after registration');
 
-    // Check that the user is logged in
-    const userData = await page.evaluate(() => {
-      const data = localStorage.getItem('userData');
-      return data ? JSON.parse(data) : null;
+    // Debug: Check localStorage keys
+    const allKeys = await page.evaluate(() => Object.keys(localStorage));
+    console.log('   All localStorage keys:', allKeys);
+
+    // Check that the user is logged in (Supabase session)
+    const supabaseSession = await page.evaluate(() => {
+      const keys = Object.keys(localStorage);
+      const authKey = keys.find(key => key.startsWith('sb-') && key.includes('-auth-token'));
+      if (authKey) {
+        const data = localStorage.getItem(authKey);
+        return data ? JSON.parse(data) : null;
+      }
+      return null;
     });
 
-    expect(userData).not.toBeNull();
-    expect(userData?.token).toBeTruthy();
-    expect(userData?.userId).toBeTruthy();
+    // If no session, check for error message
+    if (!supabaseSession) {
+      const errorMsg = await page.locator('text=/error|confirm/i').textContent().catch(() => '');
+      console.log('   No session found. Error message:', errorMsg);
+    }
+
+    expect(supabaseSession).not.toBeNull();
+    expect(supabaseSession?.access_token).toBeTruthy();
+    expect(supabaseSession?.user?.id).toBeTruthy();
     console.log('✓ User is logged in after registration');
-    console.log(`   Token: ${userData?.token.substring(0, 20)}...`);
-    console.log(`   User ID: ${userData?.userId}`);
+    console.log(`   Access Token: ${supabaseSession?.access_token?.substring(0, 20)}...`);
+    console.log(`   User ID: ${supabaseSession?.user?.id}`);
 
     // Check that you are no longer on the login page
     const isRedirected = page.url().indexOf('/login') === -1;
@@ -109,10 +124,18 @@ test.describe('Complete User Authentication Scenario', () => {
     // Wait for disconnection
     await page.waitForTimeout(2000);
 
-    // Check that the token is deleted
-    const userDataAfterLogout = await page.evaluate(() => localStorage.getItem('userData'));
-    expect(userDataAfterLogout).toBeNull();
-    console.log('✓ User is logged out (token removed from localStorage)');
+    // Check that the Supabase session is deleted
+    const sessionAfterLogout = await page.evaluate(() => {
+      const keys = Object.keys(localStorage);
+      const authKey = keys.find(key => key.startsWith('sb-') && key.includes('-auth-token'));
+      if (authKey) {
+        const data = localStorage.getItem(authKey);
+        return data ? JSON.parse(data) : null;
+      }
+      return null;
+    });
+    expect(sessionAfterLogout).toBeNull();
+    console.log('✓ User is logged out (Supabase session removed from localStorage)');
 
     // Wait a bit and check that you are disconnected
     await page.waitForTimeout(2000);
@@ -144,19 +167,27 @@ test.describe('Complete User Authentication Scenario', () => {
     // Wait for connection
     await page.waitForTimeout(2000);
 
-    // Check that the user is logged back in
-    const userDataAfterRelogin = await page.evaluate(() => {
-      const data = localStorage.getItem('userData');
-      return data ? JSON.parse(data) : null;
+    // Wait a bit more for session to be stored
+    await page.waitForTimeout(1000);
+
+    // Check that the user is logged back in (Supabase session)
+    const sessionAfterRelogin = await page.evaluate(() => {
+      const keys = Object.keys(localStorage);
+      const authKey = keys.find(key => key.startsWith('sb-') && key.includes('-auth-token'));
+      if (authKey) {
+        const data = localStorage.getItem(authKey);
+        return data ? JSON.parse(data) : null;
+      }
+      return null;
     });
 
-    expect(userDataAfterRelogin).not.toBeNull();
-    expect(userDataAfterRelogin?.token).toBeTruthy();
-    expect(userDataAfterRelogin?.userId).toBeTruthy();
+    expect(sessionAfterRelogin).not.toBeNull();
+    expect(sessionAfterRelogin?.access_token).toBeTruthy();
+    expect(sessionAfterRelogin?.user?.id).toBeTruthy();
 
     console.log('✓ Successfully logged in again');
-    console.log(`   New Token: ${userDataAfterRelogin?.token.substring(0, 20)}...`);
-    console.log(`   User ID: ${userDataAfterRelogin?.userId}`);
+    console.log(`   New Access Token: ${sessionAfterRelogin?.access_token?.substring(0, 20)}...`);
+    console.log(`   User ID: ${sessionAfterRelogin?.user?.id}`);
 
     // Check that you are redirected
     const isRedirectedAfterLogin = page.url().indexOf('/login') === -1;

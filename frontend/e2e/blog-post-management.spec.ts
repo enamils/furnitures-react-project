@@ -56,16 +56,23 @@ test.describe('Complete Blog Post Management Flow', () => {
     await page.click('button[type="submit"]:has-text("Register")');
     await page.waitForTimeout(1000);
 
-    // Verify user is logged in
-    const userData = await page.evaluate(() => {
-      const data = localStorage.getItem('userData');
-      return data ? JSON.parse(data) : null;
+    // Verify user is logged in (Supabase session)
+    await page.waitForTimeout(2000);
+
+    const supabaseSession = await page.evaluate(() => {
+      const keys = Object.keys(localStorage);
+      const authKey = keys.find(key => key.startsWith('sb-') && key.includes('-auth-token'));
+      if (authKey) {
+        const data = localStorage.getItem(authKey);
+        return data ? JSON.parse(data) : null;
+      }
+      return null;
     });
 
-    expect(userData).not.toBeNull();
-    expect(userData?.token).toBeTruthy();
+    expect(supabaseSession).not.toBeNull();
+    expect(supabaseSession?.access_token).toBeTruthy();
     console.log('✓ User registered and logged in');
-    console.log(`   User ID: ${userData?.userId}`);
+    console.log(`   User ID: ${supabaseSession?.user?.id}`);
 
     // ===== STEP 5: GO TO BLOG PAGE =====
     console.log('\nStep 5: Navigate to Blog page');
