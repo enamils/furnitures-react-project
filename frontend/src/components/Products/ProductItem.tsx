@@ -10,8 +10,6 @@ type ProductItemProps = {
     product: Product;
 };
 
-const API_URL = import.meta.env.VITE_FURNITURES_URL || 'http://localhost:5000';
-
 const ProductItem: React.FC<ProductItemProps> = ({product}) => {
     const { addToCart } = useCart();
 
@@ -23,7 +21,7 @@ const ProductItem: React.FC<ProductItemProps> = ({product}) => {
     return (
         <li>
             <button className={classes.productItem} onClick={addToCartHandler}>
-                <img className={`${classes.thumbnail} mb-9`} src={`${API_URL}/${product.image}`} alt={product.name} loading="lazy" />
+                <img className={`${classes.thumbnail} mb-9`} src={product.image} alt={product.name} loading="lazy" />
                 <span className={classes.title}>{product.name}</span>
                 <span className={classes.price}>{currencyFormatter.format(product.price)}</span>
                 <span>Add to Cart</span>

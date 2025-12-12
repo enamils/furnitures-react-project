@@ -1,9 +1,9 @@
 import React from "react";
 import {Navigate, Outlet, useLocation} from "react-router-dom";
-import {useAuth} from "../../hooks/useAuth.ts";
+import {useAuthentication} from "../../hooks/useAuthentication.ts";
 
 const ProtectedRoute: React.FC = () => {
-    const {isLoggedIn} = useAuth();
+    const {isLoggedIn} = useAuthentication();
     const location = useLocation();
 
     if (!isLoggedIn) {

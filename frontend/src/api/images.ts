@@ -1,11 +1,15 @@
-import type { ImageType} from "../types/imagePickerType.ts";
-const API_URL = import.meta.env.VITE_FURNITURES_URL;
+import { supabase } from "../lib/supabase";
+import type { ImageType } from "../types/imagePickerType";
 
 export const fetchSelectableImages = async (): Promise<ImageType[]> => {
-    const response = await fetch(`${API_URL}/api/posts/images`);
-    if (!response.ok) {
-        throw new Error('Failed to fetch images');
-    }
+  const { data, error } = await supabase
+    .from('images')
+    .select('*')
+    .order('id', { ascending: true });
 
-    return response.json();
-}
+  if (error) {
+    throw new Error(`Failed to fetch images: ${error.message}`);
+  }
+
+  return data || [];
+};

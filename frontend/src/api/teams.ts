@@ -1,11 +1,15 @@
-import type {TeamProfile} from "../types/teamsProfileType.ts";
-const API_URL = import.meta.env.VITE_FURNITURES_URL;
+import { supabase } from "../lib/supabase";
+import type { TeamProfile } from "../types/teamsProfileType";
 
 export const fetchTeamsProfile = async (): Promise<TeamProfile[]> => {
-    const response = await fetch(`${API_URL}/api/teams`);
-    if (!response.ok) {
-        throw new Error('Failed to fetch teams profile');
-    }
+  const { data, error } = await supabase
+    .from('teams')
+    .select('*')
+    .order('id', { ascending: true });
 
-    return response.json();
-}
+  if (error) {
+    throw new Error(`Failed to fetch teams: ${error.message}`);
+  }
+
+  return data || [];
+};
