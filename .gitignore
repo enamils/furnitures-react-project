@@ -1,3 +1,6 @@
+# Claude Code worktrees
+.conductor/
+
 # Logs
 logs
 *.log
