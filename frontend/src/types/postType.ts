@@ -4,4 +4,5 @@ export type PostType = {
     author: string;
     date: string;
     image: string;
+    user_id: string | null;
 }

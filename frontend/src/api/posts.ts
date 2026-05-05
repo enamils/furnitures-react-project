@@ -2,11 +2,6 @@ import { supabase } from "../lib/supabase";
 import type { PostFormType } from "../types/postFormType";
 import type { PostType } from "../types/postType";
 
-interface Posts extends PostFormType {
-  id: string;
-  date: string;
-}
-
 export const fetchPost = async (): Promise<PostType[]> => {
   const { data, error } = await supabase
     .from('posts')
@@ -20,7 +15,7 @@ export const fetchPost = async (): Promise<PostType[]> => {
   return data || [];
 };
 
-export const createNewPost = async (postData: PostFormType): Promise<Posts> => {
+export const createNewPost = async (postData: PostFormType): Promise<PostType> => {
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
@@ -28,7 +23,7 @@ export const createNewPost = async (postData: PostFormType): Promise<Posts> => {
   }
 
   const newPost = {
-    id: Date.now().toString(),
+    id: crypto.randomUUID(),
     author: postData.author,
     title: postData.title,
     image: postData.image,
@@ -60,14 +55,17 @@ export const updatePost = async (postData: Partial<PostType> & { id: string }): 
     .from('posts')
     .update(updateData)
     .eq('id', postData.id)
-    .select()
-    .single();
+    .select();
 
   if (error) {
     throw new Error(`Échec de la mise à jour du post: ${error.message}`);
   }
 
-  return data;
+  if (!data || data.length === 0) {
+    throw new Error(`Échec de la mise à jour du post: aucune ligne mise à jour`);
+  }
+
+  return data[0];
 };
 
 export const deletePost = async (id: string): Promise<PostType[]> => {

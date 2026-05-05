@@ -2,7 +2,7 @@ import * as React from "react";
 import classes from "./Post.module.css";
 import type {PostType} from "../../types/postType.ts";
 import {formatDate} from "../../utils/formatting.ts";
-import {useAuthentication} from "../../hooks/useAuthentication.ts";
+import {useAuth} from "../../hooks/useAuth.ts";
 import EditButton from "./EditButton.tsx";
 
 type PostProps = {
@@ -12,12 +12,13 @@ type PostProps = {
 }
 
 const Post: React.FC<PostProps> = ({posts,onDelete,showActions = true}) => {
-    const { isLoggedIn } = useAuthentication();
+    const { user } = useAuth();
+    const isOwner = user?.id === posts.user_id;
 
     return (
         <div className="mb-5 relative">
             <img className={classes.thumbnail} src={posts.image} alt={posts.title} loading="lazy"/>
-            {isLoggedIn && showActions && onDelete && (
+            {isOwner && showActions && onDelete && (
                 <>
                     <EditButton postId={posts.id} />
                     <button

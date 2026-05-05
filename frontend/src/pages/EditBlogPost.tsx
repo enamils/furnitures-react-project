@@ -7,11 +7,13 @@ import { useUpdatePost, useFetchPost } from "../hooks/usePosts.ts";
 import type { PostFormType } from "../types/postFormType.ts";
 import type { PostType } from "../types/postType.ts";
 import LoadingIndicator from "../components/UI/LoadingIndicator.tsx";
+import { useAuth } from "../hooks/useAuth.ts";
 
 const EditBlogPostPage: React.FC = () => {
     const { postId } = useParams<{ postId: string }>();
     const { data: posts = [], isLoading: isLoadingPosts, error: postsError } = useFetchPost();
     const { mutate, isPending, isError, error } = useUpdatePost();
+    const { user } = useAuth();
 
     const post = posts.find((p: PostType) => p.id === postId);
 
@@ -31,6 +33,10 @@ const EditBlogPostPage: React.FC = () => {
 
     if (!post) {
         return <ErrorBlock title="Post not found" message="The post you are trying to edit does not exist" />;
+    }
+
+    if (user?.id !== post.user_id) {
+        return <ErrorBlock title="Access denied" message="You can only edit your own posts" />;
     }
 
     const initialData = {
