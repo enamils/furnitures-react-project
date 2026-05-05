@@ -1,4 +1,4 @@
-import {createContext, useCallback, useMemo, useState} from "react";
+import {createContext, useCallback, useEffect, useMemo, useState} from "react";
 import type { CartProductType } from '../types/cartProductType.ts';
 import type {ChildrenType} from "../types/childrenType.ts";
 
@@ -11,10 +11,23 @@ export type CartContextType = {
     updateQuantity: (id: string, quantity: number) => void;
 };
 
+const CART_STORAGE_KEY = 'cart';
+
 export const CartContext = createContext<CartContextType | undefined>(undefined);
 
 const CartContextProvider = ({children}: ChildrenType) => {
-    const [cart, setCart] = useState<CartProductType[]>([]);
+    const [cart, setCart] = useState<CartProductType[]>(() => {
+        try {
+            const stored = localStorage.getItem(CART_STORAGE_KEY);
+            return stored ? (JSON.parse(stored) as CartProductType[]) : [];
+        } catch {
+            return [];
+        }
+    });
+
+    useEffect(() => {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    }, [cart]);
 
     const addToCartHandler = useCallback((product: CartProductType): void => {
         setCart(prev => {
