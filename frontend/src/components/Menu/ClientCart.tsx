@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {NavLink, useNavigate} from "react-router-dom";
-import { useCart } from "../../hooks/useCart.ts";
+import { useCartState } from "../../hooks/useCart.ts";
 import type { CartProductType } from "../../types/cartProductType.ts";
 import { useAuthentication } from "../../hooks/useAuthentication";
 import Logout from "../UI/Logout.tsx";
@@ -11,7 +11,7 @@ import cartImg from "../../assets/images/cart.svg";
 
 const ClientCart: React.FC = () => {
     const [isModalLogout, setIsModalLogout] = useState<boolean>(false);
-    const { cart } = useCart();
+    const { cart } = useCartState();
     const { isLoggedIn, logout } = useAuthentication();
     const navigate = useNavigate();
 

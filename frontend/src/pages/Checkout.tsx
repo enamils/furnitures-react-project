@@ -2,7 +2,7 @@ import React, { useActionState } from "react";
 import { useNavigate } from "react-router-dom";
 import BillingDetails from "../components/Checkout/BillingDetails.tsx";
 import Order from "../components/Checkout/Order.tsx";
-import { useCart } from "../hooks/useCart.ts";
+import { useCartState, useCartActions } from "../hooks/useCart.ts";
 import { useCreateOrder } from "../hooks/useOrders.ts";
 import { validateBillingDetails, hasValidationErrors, type ValidationErrors } from "../utils/validation.ts";
 import type { BillingDetailsType, CheckoutOrderType } from "../types/checkoutType.ts";
@@ -22,7 +22,8 @@ const initialState: CheckoutState = {
 
 const CheckoutPage: React.FC = () => {
     const navigate = useNavigate();
-    const { cart, clearCart } = useCart();
+    const { cart } = useCartState();
+    const { clearCart } = useCartActions();
     const createOrderMutation = useCreateOrder();
 
     const checkoutAction = async (_prevState: CheckoutState, formData: FormData): Promise<CheckoutState> => {
@@ -41,7 +42,6 @@ const CheckoutPage: React.FC = () => {
             orderNotes: formData.get('orderNotes') as string || undefined,
         };
 
-        // Data Validation
         const validationErrors = validateBillingDetails(billingData);
 
         if (hasValidationErrors(validationErrors)) {
@@ -52,8 +52,7 @@ const CheckoutPage: React.FC = () => {
             };
         }
 
-        // Check that cart is not empty
-        if (!cart || cart.length === 0) {
+        if (cart.length === 0) {
             return {
                 errors: { general: "Your cart is empty" },
                 isSubmitting: false,
@@ -62,11 +61,9 @@ const CheckoutPage: React.FC = () => {
         }
 
         try {
-            // Calculating the subtotal and total
             const subtotal = cart.reduce((sum, product) => sum + product.price * product.quantity, 0);
-            const total = subtotal; // For now, no taxes or delivery fees
+            const total = subtotal; // no taxes or delivery fees yet
 
-            // Creating the command object
             const orderData: Omit<CheckoutOrderType, 'orderDate'> = {
                 billingDetails: billingData as BillingDetailsType,
                 cartItems: cart,
@@ -74,14 +71,10 @@ const CheckoutPage: React.FC = () => {
                 total,
             };
 
-            // Submitting the order
             const response = await createOrderMutation.mutateAsync(orderData);
 
             if (response.success) {
-                // Empty cart
                 clearCart();
-
-                // Redirect to confirmation page
                 navigate(`/order-confirmation/${response.orderId}`);
 
                 return {

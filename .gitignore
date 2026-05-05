@@ -12,6 +12,9 @@ dist
 dist-ssr
 playwright-report
 test-results
+frontend/e2e/**/*.js
+frontend/playwright.config.js
+frontend/tsconfig.playwright.tsbuildinfo
 *.local
 .env*.production
 CLAUDE.md

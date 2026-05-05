@@ -1,25 +1,17 @@
-import {createContext, useCallback, useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import type { CartProductType } from '../types/cartProductType.ts';
 import type {ChildrenType} from "../types/childrenType.ts";
-
-export type CartContextType = {
-    cart: CartProductType[];
-    addToCart: (product: CartProductType) => void;
-    removeFromCart: (id: string) => void;
-    clearCartItem: (id: string) => void;
-    clearCart: () => void;
-    updateQuantity: (id: string, quantity: number) => void;
-};
+import { CartStateContext, CartActionsContext, type CartStateContextType, type CartActionsContextType } from "./cartContext.ts";
 
 const CART_STORAGE_KEY = 'cart';
-
-export const CartContext = createContext<CartContextType | undefined>(undefined);
 
 const CartContextProvider = ({children}: ChildrenType) => {
     const [cart, setCart] = useState<CartProductType[]>(() => {
         try {
             const stored = localStorage.getItem(CART_STORAGE_KEY);
-            return stored ? (JSON.parse(stored) as CartProductType[]) : [];
+            if (!stored) return [];
+            const parsed: unknown = JSON.parse(stored);
+            return Array.isArray(parsed) ? (parsed as CartProductType[]) : [];
         } catch {
             return [];
         }
@@ -29,58 +21,58 @@ const CartContextProvider = ({children}: ChildrenType) => {
         localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     }, [cart]);
 
-    const addToCartHandler = useCallback((product: CartProductType): void => {
+    const addToCart = useCallback((product: CartProductType): void => {
         setCart(prev => {
-            const existingProduct = prev.find(item => item.id === product.id);
-            if (existingProduct) {
-                return prev.map(item =>
-                    item.id === product.id ? {...item, quantity: item.quantity + product.quantity} : item
-                );
-
-            }
-            return [...prev, product]
-        })
+            let found = false;
+            const updated = prev.map(item => {
+                if (item.id === product.id) {
+                    found = true;
+                    return {...item, quantity: item.quantity + product.quantity};
+                }
+                return item;
+            });
+            return found ? updated : [...updated, product];
+        });
     }, []);
 
     const removeFromCart = useCallback((id: string): void => {
         setCart(prev =>
             prev
-                .map(item =>
-                    item.id === id
-                        ? { ...item, quantity: item.quantity - 1 }
-                        : item
-                )
+                .map(item => item.id === id ? { ...item, quantity: item.quantity - 1 } : item)
                 .filter(item => item.quantity > 0)
         );
     }, []);
 
-    const clearCartItemHandler = useCallback((id: string): void => {
+    const clearCartItem = useCallback((id: string): void => {
         setCart(prev => prev.filter(item => item.id !== id));
     }, []);
 
-    const clearCartHandler = useCallback((): void => {
+    const clearCart = useCallback((): void => {
         setCart([]);
     }, []);
 
     const updateQuantity = useCallback((id: string, quantity: number): void => {
+        if (quantity <= 0) {
+            setCart(prev => prev.filter(item => item.id !== id));
+            return;
+        }
         setCart(prev =>
             prev.map(item => (item.id === id ? {...item, quantity} : item))
         );
     }, []);
 
-    const contextValue: CartContextType = useMemo( () => ({
-        cart,
-        addToCart: addToCartHandler,
-        removeFromCart,
-        clearCartItem: clearCartItemHandler,
-        clearCart: clearCartHandler,
-        updateQuantity,
-    }), [cart, addToCartHandler, removeFromCart, clearCartItemHandler, clearCartHandler, updateQuantity]);
+    const stateValue: CartStateContextType = useMemo(() => ({ cart }), [cart]);
+
+    const actionsValue: CartActionsContextType = useMemo(() => ({
+        addToCart, removeFromCart, clearCartItem, clearCart, updateQuantity,
+    }), [addToCart, removeFromCart, clearCartItem, clearCart, updateQuantity]);
 
     return (
-        <CartContext.Provider value={contextValue}>
-            {children}
-        </CartContext.Provider>
+        <CartStateContext.Provider value={stateValue}>
+            <CartActionsContext.Provider value={actionsValue}>
+                {children}
+            </CartActionsContext.Provider>
+        </CartStateContext.Provider>
     );
 }
 

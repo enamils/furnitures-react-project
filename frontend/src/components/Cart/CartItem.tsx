@@ -1,6 +1,6 @@
 import * as React from "react";
 import toast from 'react-hot-toast';
-import {useCart} from "../../hooks/useCart.ts";
+import {useCartActions} from "../../hooks/useCart.ts";
 import {currencyFormatter} from "../../utils/formatting.ts";
 import type {CartProductType} from "../../types/cartProductType.ts";
 
@@ -9,7 +9,7 @@ type ProductItemProps = {
 };
 
 const CartItem: React.FC<ProductItemProps> = ({product}) => {
-    const {addToCart, removeFromCart, clearCartItem} = useCart();
+    const {addToCart, removeFromCart, clearCartItem} = useCartActions();
 
     const totalPrice: number = product.price * product.quantity;
 

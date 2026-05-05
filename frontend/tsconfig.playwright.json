@@ -6,7 +6,8 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "types": ["node", "@playwright/test"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noEmit": true
   },
   "include": ["playwright.config.ts", "e2e/**/*.ts"]
 }

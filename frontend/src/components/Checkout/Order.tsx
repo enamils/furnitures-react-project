@@ -1,5 +1,5 @@
 import React from "react";
-import {useCart} from "../../hooks/useCart.ts";
+import {useCartState} from "../../hooks/useCart.ts";
 import Accordion from "../UI/Accordion.tsx";
 import Button from "../UI/Button.tsx";
 import {currencyFormatter} from "../../utils/formatting.ts";
@@ -10,7 +10,7 @@ interface OrderProps {
 }
 
 const Order: React.FC<OrderProps> = ({ isPending }) => {
-    const {cart} = useCart();
+    const {cart} = useCartState();
 
     const cartSubtotal: number = cart.reduce((sum: number, product: CartProductType) => sum + product.price * product.quantity, 0);
 
