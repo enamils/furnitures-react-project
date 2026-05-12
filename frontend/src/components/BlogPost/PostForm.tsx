@@ -7,6 +7,7 @@ import InfoBlock from "../UI/InfoBlock.tsx";
 import {ImagePickerSkeleton} from "../UI/Skeleton.tsx";
 import {useImages} from "../../hooks/useImages.ts";
 import type {PostFormType} from "../../types/postFormType.ts";
+import {validatePostForm, hasValidationErrors, type ValidationErrors} from "../../utils/validation.ts";
 
 type PostFormProps = {
     onSubmit: (data: PostFormType) => void;
@@ -16,17 +17,20 @@ type PostFormProps = {
 
 const PostForm: React.FC<PostFormProps> = ({onSubmit, children, initialData}) => {
     const [selectedImage, setSelectedImage] = useState<string>(initialData?.image || '');
+    const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
     const {data : loadedImages = [], isLoading, error} = useImages();
 
     const handleSelectImage = (imagePath: string) => {
         setSelectedImage(imagePath);
+        if (validationErrors.image) {
+            setValidationErrors(prev => ({ ...prev, image: '' }));
+        }
     }
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
-        // Extracting title and author from form data
         const title = formData.get('title')?.toString() || '';
         const author = formData.get('author')?.toString() || '';
 
@@ -36,13 +40,20 @@ const PostForm: React.FC<PostFormProps> = ({onSubmit, children, initialData}) =>
             image: selectedImage
         };
 
+        const errors = validatePostForm(postData);
+        if (hasValidationErrors(errors)) {
+            setValidationErrors(errors);
+            return;
+        }
+
+        setValidationErrors({});
         onSubmit(postData);
     }
 
     return (
         <form className="lg:max-w-[60rem] mx-auto" onSubmit={handleSubmit}>
-            <Input id="title" label="Title" type="text" defaultValue={initialData?.title} />
-            <Input id="author" label="Author" type="text" defaultValue={initialData?.author} />
+            <Input id="title" label="Title" type="text" defaultValue={initialData?.title} error={validationErrors.title} />
+            <Input id="author" label="Author" type="text" defaultValue={initialData?.author} error={validationErrors.author} />
 
             {isLoading && (
                 <ul className="flex flex-wrap mt-4 gap-4">
@@ -59,11 +70,16 @@ const PostForm: React.FC<PostFormProps> = ({onSubmit, children, initialData}) =>
 
             {!isLoading && loadedImages.length === 0 && <InfoBlock message="No Post available. Please create a new post." />}
             {!isLoading && loadedImages.length > 0 && (
-                <ImagePicker
-                    images={loadedImages}
-                    selectedImage={selectedImage}
-                    onSelect={handleSelectImage}
-                />
+                <>
+                    <ImagePicker
+                        images={loadedImages}
+                        selectedImage={selectedImage}
+                        onSelect={handleSelectImage}
+                    />
+                    {validationErrors.image && (
+                        <p className="text-red-500 text-sm mt-2">{validationErrors.image}</p>
+                    )}
+                </>
             )}
 
             <div className="mt-4">

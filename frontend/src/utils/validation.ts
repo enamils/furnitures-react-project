@@ -7,7 +7,6 @@ export type ValidationErrors = {
 export const validateBillingDetails = (data: Partial<BillingDetailsType>): ValidationErrors => {
     const errors: ValidationErrors = {};
 
-    // Validation of required fields
     if (!data.country || data.country.trim() === '') {
         errors.country = 'Country is required';
     }
@@ -49,4 +48,28 @@ export const validateBillingDetails = (data: Partial<BillingDetailsType>): Valid
 
 export const hasValidationErrors = (errors: ValidationErrors): boolean => {
     return Object.keys(errors).length > 0;
+};
+
+export const validatePostForm = (data: { title: string; author: string; image: string }): ValidationErrors => {
+    const errors: ValidationErrors = {};
+
+    const title = data.title.trim();
+    if (!title) {
+        errors.title = 'Title is required';
+    } else if (title.length < 3) {
+        errors.title = 'Title must be at least 3 characters';
+    }
+
+    const author = data.author.trim();
+    if (!author) {
+        errors.author = 'Author is required';
+    } else if (author.length < 2) {
+        errors.author = 'Author name must be at least 2 characters';
+    }
+
+    if (!data.image.trim()) {
+        errors.image = 'Please select an image';
+    }
+
+    return errors;
 };
